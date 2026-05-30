@@ -895,11 +895,11 @@ export const Dashboard: React.FC<Props> = ({
                             {userMenuOpen && (
                                 <div className="absolute right-0 mt-3 w-48 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700 py-2 z-50 animate-in fade-in zoom-in-95 origin-top-right overflow-hidden">
                                     <div className="px-4 py-2 border-b border-gray-50 dark:border-gray-700 mb-1">
-                                        <p className="text-[10px] font-black uppercase text-gray-400 tracking-widest">Inloggad som</p>
+                                        <p className="text-[10px] font-black uppercase text-gray-400 tracking-widest">{t('logged_in_as', 'Inloggad som')}</p>
                                         <p className="text-xs font-bold truncate">{userProfile.displayName}</p>
                                     </div>
-                                    <button onClick={() => { setShowSettingsModal(true); setUserMenuOpen(false); }} className="w-full text-left px-4 py-3 text-xs font-bold text-gray-700 dark:text-gray-200 hover:bg-gray-50 flex items-center gap-3"><Edit2 className="w-4 h-4 text-gray-400" /> Inställningar</button>
-                                    <button onClick={onLogout} className="w-full text-left px-4 py-3 text-xs font-bold text-red-500 hover:bg-red-50 flex items-center gap-3"><Trash2 className="w-4 h-4" /> Logga ut</button>
+                                    <button onClick={() => { setShowSettingsModal(true); setUserMenuOpen(false); }} className="w-full text-left px-4 py-3 text-xs font-bold text-gray-700 dark:text-gray-200 hover:bg-gray-50 flex items-center gap-3"><Edit2 className="w-4 h-4 text-gray-400" /> {t('settings', 'Inställningar')}</button>
+                                    <button onClick={onLogout} className="w-full text-left px-4 py-3 text-xs font-bold text-red-500 hover:bg-red-50 flex items-center gap-3"><Trash2 className="w-4 h-4" /> {t('logout', 'Logga ut')}</button>
                                 </div>
                             )}
                         </div>

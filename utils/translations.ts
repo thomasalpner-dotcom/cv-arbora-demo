@@ -14,6 +14,7 @@ export const LANGUAGES: { code: Language; name: string; flag: string }[] = [
 
 export const translations: Record<Language, Record<string, string>> = {
   sv: {
+    "logged_in_as": "Inloggad som",
     "start_date": "Startdatum",
     "end_date": "Slutdatum",
     "company_org_school": "Företag / Organisation / Skola",
@@ -428,6 +429,7 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Skriv ditt meddelande..."
   },
   en: {
+    "logged_in_as": "Logged in as",
     "start_date": "Start Date",
     "end_date": "End Date",
     "company_org_school": "Company / Organization / School",
@@ -842,6 +844,7 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Write your message..."
   },
   de: {
+    "logged_in_as": "Eingeloggt als",
     "start_date": "Startdatum",
     "end_date": "Enddatum",
     "company_org_school": "Unternehmen / Organisation / Schule",
@@ -1254,6 +1257,7 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Schreiben Sie Ihre Nachricht..."
   },
   fi: {
+    "logged_in_as": "Kirjautunut käyttäjänä",
     "start_date": "Aloituspäivä",
     "end_date": "Päättymispäivä",
     "company_org_school": "Yritys / Organisaatio / Koulu",
@@ -1666,6 +1670,7 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Kirjoita viestisi..."
   },
   da: {
+    "logged_in_as": "Logget ind som",
     "start_date": "Startdato",
     "end_date": "Slutdato",
     "company_org_school": "Virksomhed / Organisation / Skole",
@@ -2078,6 +2083,7 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Skriv din besked..."
   },
   no: {
+    "logged_in_as": "Logget inn som",
     "start_date": "Startdato",
     "end_date": "Slutdato",
     "company_org_school": "Selskap / Organisasjon / Skole",
@@ -2492,6 +2498,7 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Skriv meldingen din..."
   },
   fr: {
+    "logged_in_as": "Connecté en tant que",
     "start_date": "Date de début",
     "end_date": "Date de fin",
     "company_org_school": "Entreprise / Organisation / École",
