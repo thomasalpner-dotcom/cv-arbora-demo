@@ -987,8 +987,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                 </div>
 
                 <nav className="flex-1 p-6 space-y-2 overflow-y-auto custom-scrollbar">
-                    <div className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-4 px-2">Huvudmeny</div>
-                    <NavItem icon={<LayoutDashboard />} label="Översikt" active={activeTab === 'overview'} onClick={() => setActiveTab('overview')} />
+                    <div className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-4 px-2">{t("main_menu", "Huvudmeny")}</div>
+                    <NavItem icon={<LayoutDashboard />} label={t("overview", "Översikt")} active={activeTab === 'overview'} onClick={() => setActiveTab('overview')} />
                     <NavItem icon={<Users />} label={t("coaches") || "Coacher"} active={activeTab === 'coaches'} onClick={() => setActiveTab('coaches')} badge={stats.activeCoaches} />
 
                     <div className="pt-8 text-[9px] font-black text-slate-400 uppercase tracking-widest mb-4 px-2">{t("tools") || "Verktyg"}</div>
@@ -1074,12 +1074,12 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                 activeTab === 'templates' ? 'Mall-Labbet' :
                                                     activeTab === 'settings' ? (
                                                         <div className="flex items-center gap-2">
-                                                            Inställningar <ChevronRight className="w-4 h-4 text-slate-400" />
+                                                            {t("settings", "Inställningar")} <ChevronRight className="w-4 h-4 text-slate-400" />
                                                             <span className="text-brand-400">
-                                                                {settingsSubTab === 'branding' ? 'Branding' :
-                                                                    settingsSubTab === 'api' ? 'API & Teknik' :
-                                                                        settingsSubTab === 'prompts' ? 'AI-Instruktioner' :
-                                                                            settingsSubTab === 'avatar' ? 'AI-Identitet' : 'Säkerhet'}
+                                                                {settingsSubTab === 'branding' ? t('branding_tab', 'Branding') :
+                                                                    settingsSubTab === 'api' ? t('api_tech', 'API & Teknik') :
+                                                                        settingsSubTab === 'prompts' ? t('ai_instructions', 'AI-Instruktioner') :
+                                                                            settingsSubTab === 'avatar' ? t('ai_identity', 'AI-Identitet') : t('security', 'Säkerhet')}
                                                             </span>
                                                         </div>
                                                     ) : 'E-postmallar'
@@ -1091,7 +1091,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                         activeTab === 'whitelist' ? 'Hantera access-listan' :
                                             activeTab === 'stock' ? 'Publicera bilder för coacher' :
                                                 activeTab === 'templates' ? 'Skapa CV-layouter' :
-                                                    activeTab === 'settings' ? 'Global konfiguration' : 'Hantera e-postmallar'}
+                                                    activeTab === 'settings' ? t('global_configuration', 'Global konfiguration') : (t('manage_email_templates', 'Hantera e-postmallar'))}
                             </p>
                         </div>
                     </div>
@@ -1581,7 +1581,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                             className={`px-8 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 shadow-xl ${showSaveSuccess ? 'bg-emerald-500 text-white shadow-emerald-500/20' : 'bg-brand-400 text-white hover:bg-brand-500 shadow-brand-400/20'}`}
                                                         >
                                                             {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : showSaveSuccess ? <Check className="w-4 h-4" /> : <Save className="w-4 h-4" />}
-                                                            {showSaveSuccess ? 'Sparat' : 'Spara AI Inställningar'}
+                                                            {showSaveSuccess ? t('settings_saved', 'Inställningar sparade') : t('save_ai_settings', 'Spara AI Inställningar')}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -1661,7 +1661,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                 className={`px-8 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 shadow-xl ${showSaveSuccess ? 'bg-emerald-500 text-white shadow-emerald-500/20' : 'bg-brand-400 text-white hover:bg-brand-500 shadow-brand-400/20'}`}
                                                             >
                                                                 {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : showSaveSuccess ? <Check className="w-4 h-4" /> : <Save className="w-4 h-4" />}
-                                                                {showSaveSuccess ? 'Sparat' : 'Spara API-inställningar'}
+                                                                {showSaveSuccess ? t('settings_saved', 'Inställningar sparade') : t('save_api_settings', 'Spara API-inställningar')}
                                                             </button>
                                                         </div>
                                                     </div>
@@ -1723,16 +1723,16 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                             <ShieldCheck className="w-6 h-6" />
                                                         </div>
                                                         <div className="flex-1">
-                                                            <h3 className="text-xl font-black text-slate-900 dark:text-white">Säkerhet & Åtkomst</h3>
-                                                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Hantera inloggning och åtkomstbegränsningar</p>
+                                                            <h3 className="text-xl font-black text-slate-900 dark:text-white">{t("security_access", "Säkerhet & Åtkomst")}</h3>
+                                                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{t("manage_login_access", "Hantera inloggning och åtkomstbegränsningar")}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 rounded-[2.5rem] space-y-8 shadow-sm">
                                                         <div className="space-y-4">
-                                                            <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Automatisk Godkännande (Domäner)</h4>
+                                                            <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">{t("auto_approval_domains", "Automatisk Godkännande (Domäner)")}</h4>
                                                             <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                                                                Ange e-postdomäner som automatiskt får registrera sig. Separera med komma (t.ex. @foretag.se, @kund.com).
+                                                                {t("auto_approval_domains_desc", "Ange e-postdomäner som automatiskt får registrera sig. Separera med komma (t.ex. @foretag.se, @kund.com).")}
                                                             </p>
                                                             <div className="relative">
                                                                 <input
@@ -1743,11 +1743,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                     placeholder="@foretag.se, @partner.se"
                                                                 />
                                                             </div>
-                                                            <p className="text-[9px] text-slate-400 font-medium italic">Användare med dessa domäner behöver inte finnas i väntelistan för att skapa ett konto.</p>
+                                                            <p className="text-[9px] text-slate-400 font-medium italic">{t("domain_whitelist_info", "Användare med dessa domäner behöver inte finnas i väntelistan för att skapa ett konto.")}</p>
                                                         </div>
 
                                                         <div className="pt-8 border-t border-slate-50 dark:border-slate-800 space-y-4">
-                                                            <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Funktionsbegränsningar</h4>
+                                                            <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">{t("feature_limits", "Funktionsbegränsningar")}</h4>
                                                             <label className="flex items-center gap-4 p-5 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-all group">
                                                                 <div className={`w-12 h-6 rounded-full relative transition-colors ${aiForm.allowBulkImportForCoaches ? 'bg-emerald-500' : 'bg-slate-300'}`}>
                                                                     <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${aiForm.allowBulkImportForCoaches ? 'left-7' : 'left-1'}`}></div>
@@ -1759,8 +1759,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                     onChange={(e) => setAiForm({ ...aiForm, allowBulkImportForCoaches: e.target.checked })}
                                                                 />
                                                                 <div className="flex-1">
-                                                                    <div className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">Tillåt Massimport för Coacher</div>
-                                                                    <div className="text-[10px] text-slate-500 font-medium">Låter coacher ladda upp hela arkiv av CV:n direkt från sin dashboard.</div>
+                                                                    <div className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">{t("allow_bulk_import_coaches", "Tillåt Massimport för Coacher")}</div>
+                                                                    <div className="text-[10px] text-slate-500 font-medium">{t("allow_bulk_import_coaches_desc", "Låter coacher ladda upp hela arkiv av CV:n direkt från sin dashboard.")}</div>
                                                                 </div>
                                                             </label>
 
@@ -1775,8 +1775,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                     onChange={(e) => setAiForm({ ...aiForm, disableEmailVerification: e.target.checked })}
                                                                 />
                                                                 <div className="flex-1">
-                                                                    <div className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">Inaktivera E-postverifiering (Demo-läge)</div>
-                                                                    <div className="text-[10px] text-slate-500 font-medium">Godkänner alla nya konton direkt utan att de behöver klicka på en bekräftelselänk i sin e-post. Perfekt för presentationer.</div>
+                                                                    <div className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">{t("disable_email_verification", "Inaktivera E-postverifiering (Demo-läge)")}</div>
+                                                                    <div className="text-[10px] text-slate-500 font-medium">{t("disable_email_verification_desc", "Godkänner alla nya konton direkt utan att de behöver klicka på en bekräftelselänk i sin e-post. Perfekt för presentationer.")}</div>
                                                                 </div>
                                                             </label>
 
@@ -1798,15 +1798,15 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                         </div>
 
                                                         <div className="pt-4 border-t border-slate-50 dark:border-slate-800">
-                                                            <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Övriga Inställningar</h4>
+                                                            <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">{t("other_settings", "Övriga Inställningar")}</h4>
                                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 opacity-50 pointer-events-none">
                                                                 <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800">
-                                                                    <div className="text-[10px] font-black uppercase text-slate-400">Tvåfaktorsautentisering</div>
-                                                                    <div className="text-xs font-bold mt-1 text-slate-500">Kommer snart...</div>
+                                                                    <div className="text-[10px] font-black uppercase text-slate-400">{t("two_factor_auth", "Tvåfaktorsautentisering")}</div>
+                                                                    <div className="text-xs font-bold mt-1 text-slate-500">{t("coming_soon", "Kommer snart...")}</div>
                                                                 </div>
                                                                 <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800">
-                                                                    <div className="text-[10px] font-black uppercase text-slate-400">Session Timeout</div>
-                                                                    <div className="text-xs font-bold mt-1 text-slate-500">Kommer snart...</div>
+                                                                    <div className="text-[10px] font-black uppercase text-slate-400">{t("session_timeout", "Session Timeout")}</div>
+                                                                    <div className="text-xs font-bold mt-1 text-slate-500">{t("coming_soon", "Kommer snart...")}</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1818,7 +1818,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                 className={`px-12 py-5 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-3 shadow-xl ${showSaveSuccess ? 'bg-emerald-500 text-white shadow-emerald-500/20' : 'bg-red-600 text-white hover:bg-red-700 shadow-red-500/20'}`}
                                                             >
                                                                 {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : showSaveSuccess ? <Check className="w-4 h-4" /> : <Save className="w-4 h-4" />}
-                                                                {showSaveSuccess ? 'Inställningar sparade' : 'Spara Säkerhet'}
+                                                                {showSaveSuccess ? t('settings_saved', 'Inställningar sparade') : t('save_security', 'Spara Säkerhet')}
                                                             </button>
                                                         </div>
                                                     </div>
@@ -1830,8 +1830,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                             <Palette className="w-6 h-6" />
                                                         </div>
                                                         <div className="flex-1">
-                                                            <h3 className="text-xl font-black text-slate-900 dark:text-white">Företagsprofil & Branding</h3>
-                                                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Anpassa systemets identitet för din organisation</p>
+                                                            <h3 className="text-xl font-black text-slate-900 dark:text-white">{t("company_profile_branding", "Företagsprofil & Branding")}</h3>
+                                                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{t("customize_system_identity", "Anpassa systemets identitet för din organisation")}</p>
                                                         </div>
                                                     </div>
 
@@ -1984,20 +1984,20 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                 ) : activeTab === 'emailTemplates' ? (
                                     <div className="p-10 space-y-8">
                                         <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-6">
-                                            <h3 className="text-sm font-black text-blue-900 dark:text-blue-100 uppercase tracking-widest mb-2">Tillgängliga Variabler</h3>
-                                            <p className="text-xs text-blue-700 dark:text-blue-300 mb-3">Använd dessa variabler i dina mallar - de ersätts automatiskt:</p>
+                                            <h3 className="text-sm font-black text-blue-900 dark:text-blue-100 uppercase tracking-widest mb-2">{t('available_variables', 'Tillgängliga Variabler')}</h3>
+                                            <p className="text-xs text-blue-700 dark:text-blue-300 mb-3">{t('use_variables_info', 'Använd dessa variabler i dina mallar - de ersätts automatiskt:')}</p>
                                             <div className="grid grid-cols-2 gap-3">
                                                 <div className="bg-white dark:bg-slate-800 rounded-xl p-3">
                                                     <code className="text-xs font-bold text-brand-600">{'{{PARTICIPANT_NAME}}'}</code>
-                                                    <p className="text-[10px] text-slate-500 mt-1">Deltagarens förnamn</p>
+                                                    <p className="text-[10px] text-slate-500 mt-1">{t('participant_first_name', 'Deltagarens förnamn')}</p>
                                                 </div>
                                                 <div className="bg-white dark:bg-slate-800 rounded-xl p-3">
                                                     <code className="text-xs font-bold text-brand-600">{'{{PARTICIPANT_FULLNAME}}'}</code>
-                                                    <p className="text-[10px] text-slate-500 mt-1">För- och efternamn</p>
+                                                    <p className="text-[10px] text-slate-500 mt-1">{t('participant_full_name', 'För- och efternamn')}</p>
                                                 </div>
                                                 <div className="bg-white dark:bg-slate-800 rounded-xl p-3">
                                                     <code className="text-xs font-bold text-brand-600">{'{{COACH_NAME}}'}</code>
-                                                    <p className="text-[10px] text-slate-500 mt-1">Coachens namn</p>
+                                                    <p className="text-[10px] text-slate-500 mt-1">{t('coach_name', 'Coachens namn')}</p>
                                                 </div>
                                                 <div className="bg-white dark:bg-slate-800 rounded-xl p-3">
                                                     <code className="text-xs font-bold text-brand-600">{'{{COMPANY_NAME}}'}</code>
@@ -2010,11 +2010,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                         <div className="bg-white dark:bg-slate-800 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-sm">
                                             <h3 className="text-lg font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3">
                                                 <Mail className="w-5 h-5 text-brand-400" />
-                                                Tomt Mail (Enkel Kontakt)
+                                                {t('empty_mail_simple_contact', 'Tomt Mail (Enkel Kontakt)')}
                                             </h3>
                                             <div className="space-y-4">
                                                 <div>
-                                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 mb-2 block">Ämnesrad</label>
+                                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 mb-2 block">{t('subject_line', 'Ämnesrad')}</label>
                                                     <input
                                                         type="text"
                                                         value={aiForm.emailTemplates?.simple.subject || ''}
@@ -2032,7 +2032,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                     />
                                                 </div>
                                                 <div>
-                                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 mb-2 block">Meddelande</label>
+                                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 mb-2 block">{t('message_body', 'Meddelande')}</label>
                                                     <textarea
                                                         value={aiForm.emailTemplates?.simple.body || ''}
                                                         onChange={(e) => setAiForm({
@@ -2056,11 +2056,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                         <div className="bg-white dark:bg-slate-800 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-sm">
                                             <h3 className="text-lg font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3">
                                                 <FileText className="w-5 h-5 text-blue-400" />
-                                                Mail med CV Bifogat
+                                                {t('mail_with_cv_attached', 'Mail med CV Bifogat')}
                                             </h3>
                                             <div className="space-y-4">
                                                 <div>
-                                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 mb-2 block">Ämnesrad</label>
+                                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 mb-2 block">{t('subject_line', 'Ämnesrad')}</label>
                                                     <input
                                                         type="text"
                                                         value={aiForm.emailTemplates?.withCV.subject || ''}
@@ -2078,7 +2078,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                     />
                                                 </div>
                                                 <div>
-                                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 mb-2 block">Meddelande</label>
+                                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 mb-2 block">{t('message_body', 'Meddelande')}</label>
                                                     <textarea
                                                         value={aiForm.emailTemplates?.withCV.body || ''}
                                                         onChange={(e) => setAiForm({
@@ -2102,11 +2102,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                         <div className="bg-white dark:bg-slate-800 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-sm">
                                             <h3 className="text-lg font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3">
                                                 <Mail className="w-5 h-5 text-purple-400" />
-                                                Mail med Personligt Brev Bifogat
+                                                {t('mail_with_cover_letter_attached', 'Mail med Personligt Brev Bifogat')}
                                             </h3>
                                             <div className="space-y-4">
                                                 <div>
-                                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 mb-2 block">Ämnesrad</label>
+                                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 mb-2 block">{t('subject_line', 'Ämnesrad')}</label>
                                                     <input
                                                         type="text"
                                                         value={aiForm.emailTemplates?.withCoverLetter.subject || ''}
@@ -2124,7 +2124,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                     />
                                                 </div>
                                                 <div>
-                                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 mb-2 block">Meddelande</label>
+                                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 mb-2 block">{t('message_body', 'Meddelande')}</label>
                                                     <textarea
                                                         value={aiForm.emailTemplates?.withCoverLetter.body || ''}
                                                         onChange={(e) => setAiForm({
@@ -2154,12 +2154,12 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                 {isSavingAiSettings ? (
                                                     <>
                                                         <Loader2 className="w-4 h-4 animate-spin" />
-                                                        Sparar...
+                                                        {t('saving', 'Sparar...')}
                                                     </>
                                                 ) : (
                                                     <>
                                                         <Save className="w-4 h-4" />
-                                                        Spara E-postmallar
+                                                        {t('save_email_templates', 'Spara E-postmallar')}
                                                     </>
                                                 )}
                                             </button>

@@ -1,3 +1,4 @@
+import { useTranslation } from '../utils/translations';
 import React, { useState } from 'react';
 import { Search, AlertTriangle, CheckCircle2, Copy, Trash2, Loader2 } from 'lucide-react';
 import { ResumeData } from '../types';
@@ -10,6 +11,7 @@ interface DuplicateGroup {
 }
 
 export const DuplicateScanner: React.FC<{ resumes: ResumeData[] }> = ({ resumes }) => {
+    const { t } = useTranslation();
     const [results, setResults] = useState<DuplicateGroup[] | null>(null);
     const [isDeleting, setIsDeleting] = useState<string | null>(null);
 
@@ -155,7 +157,7 @@ export const DuplicateScanner: React.FC<{ resumes: ResumeData[] }> = ({ resumes 
                             Dubblettanalys av Databasen
                         </h3>
                         <p className="text-xs text-slate-500 mt-1">
-                            Söker igenom alla {resumes.length} CV:n efter dubbletter baserat på E-post, Telefon eller Namn+Kontext.
+                            {t("searching_duplicates_info", "Söker igenom alla {count} CV:n efter dubbletter baserat på E-post, Telefon eller Namn+Kontext.").replace("{count}", resumes.length.toString())}
                         </p>
                     </div>
                     <button
@@ -172,8 +174,8 @@ export const DuplicateScanner: React.FC<{ resumes: ResumeData[] }> = ({ resumes 
                     {results.length === 0 ? (
                         <div className="bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-800 p-8 rounded-[2rem] text-center">
                             <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto mb-3" />
-                            <h4 className="text-lg font-black text-emerald-900 dark:text-emerald-100">Inga dubbletter hittades!</h4>
-                            <p className="text-sm text-emerald-700 dark:text-emerald-300">Databasen ser ren och fin ut.</p>
+                            <h4 className="text-lg font-black text-emerald-900 dark:text-emerald-100">{t("no_duplicates_found", "Inga dubbletter hittades!")}</h4>
+                            <p className="text-sm text-emerald-700 dark:text-emerald-300">{t("database_clean", "Databasen ser ren och fin ut.")}</p>
                         </div>
                     ) : (
                         results.map((group, idx) => (
@@ -181,7 +183,7 @@ export const DuplicateScanner: React.FC<{ resumes: ResumeData[] }> = ({ resumes 
                                 <div className="flex items-center gap-3 mb-4">
                                     <AlertTriangle className="w-5 h-5 text-amber-500" />
                                     <h4 className="font-black text-amber-900 dark:text-amber-100 uppercase tracking-widest text-xs">
-                                        Misstänkt dublettgrupp ({group.reason})
+                                        {t("suspected_duplicate_group", "Misstänkt dublettgrupp")} ({group.reason})
                                     </h4>
                                 </div>
                                 <div className="space-y-3">
@@ -215,14 +217,14 @@ export const DuplicateScanner: React.FC<{ resumes: ResumeData[] }> = ({ resumes 
                                                 </div>
                                             </div>
                                             <div className="flex items-center gap-2">
-                                                <a href={`/resume/${dupe.id}`} target="_blank" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg text-slate-400 transition-colors" title="Öppna CV">
+                                                <a href={`/resume/${dupe.id}`} target="_blank" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg text-slate-400 transition-colors" title={t("open_cv", "Öppna CV")}>
                                                     <Copy className="w-4 h-4" />
                                                 </a>
                                                 <button
                                                     onClick={() => handleDelete(dupe)}
                                                     disabled={isDeleting === dupe.id}
                                                     className="p-2 bg-red-50 hover:bg-red-100 text-red-500 rounded-lg transition-colors border border-red-100"
-                                                    title="Radera denna dublett"
+                                                    title={t("delete_duplicate", "Radera denna dublett")}
                                                 >
                                                     {isDeleting === dupe.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
                                                 </button>

@@ -1,3 +1,4 @@
+import { useTranslation } from '../utils/translations';
 import React, { useState, useCallback, useEffect } from 'react';
 import { Upload, FileText, CheckCircle2, AlertCircle, Loader2, Sparkles, X, Database, AlertTriangle } from 'lucide-react';
 import { ImportService } from '../services/ImportService';
@@ -21,6 +22,7 @@ export const LegacyImport: React.FC<{
     existingResumes?: ResumeData[],
     coachId?: string
 }> = ({ apiKey, geminiModel, importMappingPrompt, existingResumes = [], coachId = 'system-import' }) => {
+    const { t } = useTranslation();
     const [files, setFiles] = useState<ProcessedFile[]>([]);
     const [isProcessing, setIsProcessing] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
@@ -226,10 +228,10 @@ export const LegacyImport: React.FC<{
         <div className="space-y-8 animate-in fade-in duration-500">
             <div className="bg-indigo-500/5 border border-indigo-500/10 p-10 rounded-[3rem]">
                 <div className="max-w-2xl">
-                    <h2 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Mass-importera Arkiv</h2>
+                    <h2 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">{t("mass_import_archive", "Mass-importera Arkiv")}</h2>
                     <p className="text-sm text-slate-500 font-medium mt-2 leading-relaxed">
-                        Dra in PDF- eller Word-filer här för att göra dem sökbara i Savå AI.
-                        Systemet extraherar kompetenser automatiskt och sparar originalfilen i Firebase Storage.
+                        {t("drag_pdf_word_info", "Dra in PDF- eller Word-filer här för att göra dem sökbara i Savå AI. ")}
+                        
                     </p>
                 </div>
 
@@ -249,9 +251,9 @@ export const LegacyImport: React.FC<{
                     </div>
                     <div>
                         <p className="text-lg font-black text-slate-900 dark:text-white">
-                            {isDragging ? 'Släpp filerna nu!' : 'Dra och släpp filer här eller Ctrl+V'}
+                            {isDragging ? t("drop_files_now", "Släpp filerna nu!") : t("drag_drop_files", "Dra och släpp filer här eller Ctrl+V")}
                         </p>
-                        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1 mb-4">Stöder .pdf, .docx och .txt</p>
+                        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1 mb-4">{t("supports_formats", "Stöder .pdf, .docx och .txt")}</p>
                         <button className="px-6 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-sm hover:bg-slate-50 transition-all">
                             Välj från datorn
                         </button>
@@ -274,7 +276,7 @@ export const LegacyImport: React.FC<{
                     <div className="p-8 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
                         <div className="flex items-center gap-4">
                             <Database className="w-6 h-6 text-indigo-500" />
-                            <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">Filer i kö ({files.length})</h3>
+                            <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">{t("files_in_queue", "Filer i kö")} ({files.length})</h3>
                         </div>
                         <button
                             onClick={processFiles}
@@ -282,7 +284,7 @@ export const LegacyImport: React.FC<{
                             className="px-8 py-3 bg-indigo-500 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-indigo-500/20 hover:bg-indigo-600 disabled:opacity-50 flex items-center gap-2"
                         >
                             {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
-                            Starta Import
+                            {t("start_mass_import", "Starta Import")}
                         </button>
                     </div>
 
@@ -314,14 +316,14 @@ export const LegacyImport: React.FC<{
                                             />
                                         </div>
                                         <p className="text-[9px] font-black uppercase tracking-widest mt-2">
-                                            {f.status === 'waiting' && <span className="text-slate-400">Väntar...</span>}
-                                            {f.status === 'duplicate' && <span className="text-amber-500">Filnamn finns redan (Klicka start för att tvinga)</span>}
-                                            {f.status === 'reading' && <span className="text-indigo-500">Läser fil...</span>}
-                                            {f.status === 'uploading' && <span className="text-indigo-500">Laddar upp till molnet...</span>}
-                                            {f.status === 'analyzing' && <span className="text-indigo-500">Savå AI analyserar...</span>}
+                                            {f.status === 'waiting' && <span className="text-slate-400">{t("status_waiting", "Väntar...")}</span>}
+                                            {f.status === 'duplicate' && <span className="text-amber-500">{t("status_duplicate_filename", "Filnamn finns redan (Klicka start för att tvinga)")}</span>}
+                                            {f.status === 'reading' && <span className="text-indigo-500">{t("status_reading_file", "Läser fil...")}</span>}
+                                            {f.status === 'uploading' && <span className="text-indigo-500">{t("status_uploading", "Laddar upp till molnet...")}</span>}
+                                            {f.status === 'analyzing' && <span className="text-indigo-500">{t("status_analyzing", "Savå AI analyserar...")}</span>}
                                             {f.status === 'done' && (
                                                 f.warning ? <span className="text-amber-600 font-bold">{f.warning}</span> :
-                                                    <span className="text-emerald-500">Klar! {f.result?.personal?.firstName} {f.result?.personal?.lastName}</span>
+                                                    <span className="text-emerald-500">{t("status_done", "Klar!")} {f.result?.personal?.firstName} {f.result?.personal?.lastName}</span>
                                             )}
                                             {f.status === 'error' && <span className="text-red-500">{f.error}</span>}
                                         </p>
