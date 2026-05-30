@@ -1,0 +1,8 @@
+{
+  "name": "första uppladdningen 260101-15:16",
+  "description": "Aventus.cv - En professionell svensk CV-byggare med live-förhandsgranskning och moderna mallar.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

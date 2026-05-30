@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aventus.cv - Coach Plattform</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Open+Sans:wght@300;400;600&family=Playfair+Display:wght@400;700&family=Roboto+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: 'rgba(var(--primary-rgb), 0.05)',
+              100: 'rgba(var(--primary-rgb), 0.1)',
+              200: 'rgba(var(--primary-rgb), 0.2)',
+              300: 'rgba(var(--primary-rgb), 0.4)',
+              400: 'var(--primary-color)',
+              500: 'var(--primary-color)',
+              600: 'var(--primary-color)', // Fallback for some hover states
+            },
+            surface: {
+              50: '#f8fafc',
+              100: '#f1f5f9',
+              200: '#e2e8f0',
+              300: '#cbd5e1',
+              800: '#1e293b',
+              900: '#0f172a',
+              950: '#020617',
+            }
+          },
+          boxShadow: {
+            'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+            'soft-lg': '0 10px 40px -5px rgba(0, 0, 0, 0.08)',
+            'glow': '0 0 20px rgba(var(--primary-rgb), 0.3)',
+          },
+          animation: {
+            'in': 'fadeIn 0.3s ease-out',
+            'in-up': 'fadeInUp 0.5s ease-out',
+            'pulse-slow': 'pulse 3s infinite',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Merriweather', 'serif'],
+            mono: ['Roboto Mono', 'monospace'],
+            display: ['Playfair Display', 'serif'],
+            body: ['Open Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #4f46e5;
+      --primary-rgb: 79, 70, 229;
+    }
+
+    .dark {
+      --primary-color: #818cf8; /* Lighter indigo for better contrast in dark mode */
+      --primary-rgb: 129, 140, 248;
+    }
+
+    /* Force CV preview to always use light mode colors */
+    .cv-preview-container {
+      color-scheme: light !important;
+    }
+
+    /* Set default text color for CV preview to prevent dark mode from making text light */
+    .dark .cv-preview-container {
+      color: rgb(0 0 0) !important;
+      /* Pure black as default */
+    }
+
+    /* Reset Tailwind dark mode text colors in CV preview */
+    .dark .cv-preview-container .text-gray-900 {
+      color: rgb(0 0 0) !important;
+    }
+
+    .dark .cv-preview-container .text-gray-800 {
+      color: rgb(17 24 39) !important;
+    }
+
+    .dark .cv-preview-container .text-gray-700 {
+      color: rgb(31 41 55) !important;
+    }
+
+    .dark .cv-preview-container .text-gray-600 {
+      color: rgb(55 65 81) !important;
+    }
+
+    .dark .cv-preview-container .text-gray-500 {
+      color: rgb(75 85 99) !important;
+    }
+
+    .dark .cv-preview-container .text-gray-400 {
+      color: rgb(107 114 128) !important;
+    }
+
+    .dark .cv-preview-container .text-gray-300 {
+      color: rgb(209 213 219) !important;
+    }
+
+    .dark .cv-preview-container .text-gray-200 {
+      color: rgb(229 231 235) !important;
+    }
+
+    .dark .cv-preview-container .text-black {
+      color: rgb(0 0 0) !important;
+    }
+
+    .dark .cv-preview-container .text-white {
+      color: rgb(255 255 255) !important;
+    }
+
+    .dark .cv-preview-container .text-slate-900 {
+      color: rgb(15 23 42) !important;
+    }
+  </style>
+
+  <script>
+      (function () {
+        try {
+          const settings = JSON.parse(localStorage.getItem('aventus_system_settings') || '{}');
+          if (settings.companyName) {
+            document.title = settings.companyName + '.cv - Coach Plattform';
+            const loaderText = document.querySelector('#loader p');
+            if (loaderText) loaderText.textContent = 'Laddar ' + settings.companyName + ' Coach-portal...';
+          }
+          if (settings.primaryColor) {
+            document.documentElement.style.setProperty('--primary-color', settings.primaryColor);
+            const hex = settings.primaryColor.replace('#', '');
+            const r = parseInt(hex.substring(0, 2), 16);
+            const g = parseInt(hex.substring(2, 4), 16);
+            const b = parseInt(hex.substring(4, 6), 16);
+            document.documentElement.style.setProperty('--primary-rgb', r + ',' + g + ',' + b);
+          }
+        } catch (e) { }
+      })();
+  </script>
+
+  <style>
+    .initial-loader {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #f1f5f9;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 16px;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .rich-text ul {
+      list-style-type: disc;
+      padding-left: 1.5em;
+    }
+
+    .rich-text ol {
+      list-style-type: decimal;
+      padding-left: 1.5em;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+    }
+
+    .dark .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      border: 3px solid transparent;
+      background-clip: content-box;
+    }
+
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border: 3px solid transparent;
+      background-clip: content-box;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.3);
+      background-clip: content-box;
+    }
+
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.3);
+      background-clip: content-box;
+    }
+
+    .cv-sheet-container {
+      position: relative;
+      width: 210mm;
+      margin: 0 auto;
+      background-color: #E2E8F0;
+    }
+
+    .cv-page-visual {
+      position: absolute;
+      width: 210mm;
+      height: 297mm;
+      background: white;
+      box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .html2pdf__page-break {
+      page-break-before: always;
+      break-before: page;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .print-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 210mm;
+      background: white !important;
+      display: none; /* Göm helt som standard för att undvika skroll-spöken */
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Visa endast vid export */
+    body.is-exporting .print-container {
+      display: block;
+      opacity: 0;
+    }
+
+    /* End of print-container CSS */
+
+    /* Helper for layout adjustment during print prep */
+    body.is-printing,
+    body.is-exporting {
+      background: white !important;
+      overflow: visible !important; /* Tillåt för export-verktyget */
+    }
+  </style>
+
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.3.1",
+    "react-dom": "https://esm.sh/react-dom@18.3.1",
+    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+    "react/jsx-runtime": "https://esm.sh/react@18.3.1/jsx-runtime",
+    "lucide-react": "https://esm.sh/lucide-react@0.454.0?deps=react@18.3.1",
+    "pdf-lib": "https://esm.sh/pdf-lib@1.17.1",
+    "@google/genai": "https://esm.sh/@google/genai@1.3.0",
+    "mammoth": "https://esm.sh/mammoth@1.8.0",
+    "firebase/compat/app": "https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js",
+    "firebase/compat/auth": "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js",
+    "firebase/compat/firestore": "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "firebase/": "https://esm.sh/firebase@^12.7.0/"
+  }
+}
+</script>
+</head>
+
+<body>
+  <div id="root">
+    <div id="loader" class="initial-loader">
+      <div class="spinner"></div>
+      <p class="text-gray-500 font-medium">Laddar Aventus Coach-portal...</p>
+    </div>
+  </div>
+  <script type="module" src="./index.tsx"></script>
+</body>
+
+</html>
