@@ -1071,7 +1071,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                     activeTab === 'coaches' ? t('manage_coaches', 'Hantera Coacher') :
                                         activeTab === 'whitelist' ? 'Godkända E-post' :
                                             activeTab === 'stock' ? 'Bildbibliotek' :
-                                                activeTab === 'templates' ? 'Mall-Labbet' :
+                                                activeTab === 'templates' ? t('template_lab', 'Mall-Labbet') :
                                                     activeTab === 'settings' ? (
                                                         <div className="flex items-center gap-2">
                                                             {t("settings", "Inställningar")} <ChevronRight className="w-4 h-4 text-slate-400" />
@@ -1090,7 +1090,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                     activeTab === 'coaches' ? t('manage_user_accounts', 'Administrera användarkonton') :
                                         activeTab === 'whitelist' ? 'Hantera access-listan' :
                                             activeTab === 'stock' ? 'Publicera bilder för coacher' :
-                                                activeTab === 'templates' ? 'Skapa CV-layouter' :
+                                                activeTab === 'templates' ? t('template_lab_subtitle', 'Skapa CV-layouter') :
                                                     activeTab === 'settings' ? t('global_configuration', 'Global konfiguration') : (t('manage_email_templates', 'Hantera e-postmallar'))}
                             </p>
                         </div>
@@ -1113,8 +1113,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                         ) : activeTab === 'templates' ? (
                             <div className="flex gap-3">
                                 <input type="file" ref={fileInputRef} className="hidden" accept="image/*,.pdf" onChange={handleCloneDesign} />
-                                <button onClick={() => fileInputRef.current?.click()} className="flex items-center gap-2 px-6 py-3 bg-violet-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-violet-600/20 hover:bg-violet-700 transition-all">{isAnalyzing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Wand2 className="w-4 h-4" />} AI-Klona</button>
-                                <button onClick={() => setEditingTemplate({ id: 'temp_' + Date.now(), name: 'Ny Mall', config: DEFAULT_MASTER_CONFIG, isPublished: false, createdAt: new Date().toISOString(), createdBy: 'admin' })} className="flex items-center gap-2 px-6 py-3 bg-brand-400 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand-400/20 hover:bg-brand-500 transition-all"><Plus className="w-4 h-4" /> Ny Mall</button>
+                                <button onClick={() => fileInputRef.current?.click()} className="flex items-center gap-2 px-6 py-3 bg-violet-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-violet-600/20 hover:bg-violet-700 transition-all">{isAnalyzing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Wand2 className="w-4 h-4" />} {t("ai_clone", "AI-Klona")}</button>
+                                <button onClick={() => setEditingTemplate({ id: 'temp_' + Date.now(), name: t('new_template', 'Ny Mall'), config: DEFAULT_MASTER_CONFIG, isPublished: false, createdAt: new Date().toISOString(), createdBy: 'admin' })} className="flex items-center gap-2 px-6 py-3 bg-brand-400 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand-400/20 hover:bg-brand-500 transition-all"><Plus className="w-4 h-4" /> {t("new_template", "Ny Mall")}</button>
                             </div>
                         ) : null}
                     </div>

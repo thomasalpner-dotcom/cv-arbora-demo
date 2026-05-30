@@ -14,6 +14,9 @@ export const LANGUAGES: { code: Language; name: string; flag: string }[] = [
 
 export const translations: Record<Language, Record<string, string>> = {
   sv: {
+    "template_lab_subtitle": "Skapa CV-layouter",
+    "ai_clone": "AI-Klona",
+    "new_template": "Ny Mall",
     "manage_coaches": "Hantera Coacher",
     "manage_user_accounts": "Administrera användarkonton",
     "new_coach": "Ny Coach",
@@ -518,6 +521,9 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Skriv ditt meddelande..."
   },
   en: {
+    "template_lab_subtitle": "Create CV layouts",
+    "ai_clone": "AI-Clone",
+    "new_template": "New Template",
     "manage_coaches": "Manage Coaches",
     "manage_user_accounts": "Manage user accounts",
     "new_coach": "New Coach",
@@ -1022,6 +1028,9 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Write your message..."
   },
   de: {
+    "template_lab_subtitle": "CV-Layouts erstellen",
+    "ai_clone": "KI-Klonen",
+    "new_template": "Neue Vorlage",
     "manage_coaches": "Coaches verwalten",
     "manage_user_accounts": "Benutzerkonten verwalten",
     "new_coach": "Neuer Coach",
@@ -1524,6 +1533,9 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Schreiben Sie Ihre Nachricht..."
   },
   fi: {
+    "template_lab_subtitle": "Luo CV-asetteluja",
+    "ai_clone": "Tekoäly-kloonaus",
+    "new_template": "Uusi malli",
     "manage_coaches": "Hallitse valmentajia",
     "manage_user_accounts": "Hallitse käyttäjätilejä",
     "new_coach": "Uusi valmentaja",
@@ -2026,6 +2038,9 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Kirjoita viestisi..."
   },
   da: {
+    "template_lab_subtitle": "Opret CV-layouts",
+    "ai_clone": "AI-Klon",
+    "new_template": "Ny Skabelon",
     "manage_coaches": "Administrer coaches",
     "manage_user_accounts": "Administrer brugerkonti",
     "new_coach": "Ny coach",
@@ -2528,6 +2543,9 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Skriv din besked..."
   },
   no: {
+    "template_lab_subtitle": "Opprett CV-layouter",
+    "ai_clone": "AI-Klon",
+    "new_template": "Ny Mal",
     "manage_coaches": "Administrer coacher",
     "manage_user_accounts": "Administrer brukerkontoer",
     "new_coach": "Ny coach",
@@ -3032,6 +3050,9 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Skriv meldingen din..."
   },
   fr: {
+    "template_lab_subtitle": "Créer des mises en page de CV",
+    "ai_clone": "Clonage IA",
+    "new_template": "Nouveau Modèle",
     "manage_coaches": "Gérer les coachs",
     "manage_user_accounts": "Gérer les comptes d'utilisateurs",
     "new_coach": "Nouveau coach",
