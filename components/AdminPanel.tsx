@@ -1068,7 +1068,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                         <div className="flex flex-col">
                             <h2 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">
                                 {activeTab === 'overview' ? (t('aventus_overview') || 'Aventus Översikt') :
-                                    activeTab === 'coaches' ? 'Hantera Coacher' :
+                                    activeTab === 'coaches' ? t('manage_coaches', 'Hantera Coacher') :
                                         activeTab === 'whitelist' ? 'Godkända E-post' :
                                             activeTab === 'stock' ? 'Bildbibliotek' :
                                                 activeTab === 'templates' ? 'Mall-Labbet' :
@@ -1087,7 +1087,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                             </h2>
                             <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none mt-1">
                                 {activeTab === 'overview' ? (t('system_status_realtime') || 'Systemstatus och realtidsdata') :
-                                    activeTab === 'coaches' ? 'Administrera användarkonton' :
+                                    activeTab === 'coaches' ? t('manage_user_accounts', 'Administrera användarkonton') :
                                         activeTab === 'whitelist' ? 'Hantera access-listan' :
                                             activeTab === 'stock' ? 'Publicera bilder för coacher' :
                                                 activeTab === 'templates' ? 'Skapa CV-layouter' :
@@ -1105,7 +1105,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                         </button>
 
                         {activeTab === 'coaches' ? (
-                            <button onClick={() => setIsAddModalOpen(true)} className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-emerald-600/20 hover:bg-emerald-700 transition-all"><Plus className="w-4 h-4" /> Ny Coach</button>
+                            <button onClick={() => setIsAddModalOpen(true)} className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-emerald-600/20 hover:bg-emerald-700 transition-all"><Plus className="w-4 h-4" /> {t('new_coach', 'Ny Coach')}</button>
                         ) : activeTab === 'whitelist' ? (
                             <button onClick={() => setIsAddModalOpen(true)} className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-emerald-600/20 hover:bg-emerald-700 transition-all"><Plus className="w-4 h-4" /> Godkänn E-post</button>
                         ) : activeTab === 'stock' ? (
@@ -1195,11 +1195,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                             type="text"
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
-                                            placeholder="Sök coach på namn eller e-post..."
+                                            placeholder={t("search_coach_placeholder", "Sök coach på namn eller e-post...")}
                                             className="w-full pl-11 pr-4 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl text-xs font-medium outline-none focus:ring-2 focus:ring-brand-400/20 focus:border-brand-400 transition-all text-slate-900 dark:text-white shadow-sm"
                                         />
                                     </div>
-                                    <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">Coacher ({filteredUsers.length})</div>
+                                    <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">{t('coaches', 'Coacher')} ({filteredUsers.length})</div>
                                 </div>
                             )}
                             <div className="p-10">
@@ -1218,25 +1218,25 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                     <div>
                                                         <div className="flex items-center gap-3">
                                                             <div className="font-black text-sm text-slate-900 dark:text-white">{u.displayName}</div>
-                                                            {u.role === 'admin' && <div className="px-2 py-0.5 bg-brand-400/10 text-brand-500 dark:text-indigo-400 rounded text-[8px] font-black uppercase tracking-widest">Admin</div>}
-                                                            {u.status === 'suspended' && <div className="px-2 py-0.5 bg-red-500/10 text-red-600 dark:text-red-400 rounded text-[8px] font-black uppercase tracking-widest">Avstängd</div>}
+                                                            {u.role === 'admin' && <div className="px-2 py-0.5 bg-brand-400/10 text-brand-500 dark:text-indigo-400 rounded text-[8px] font-black uppercase tracking-widest">{t("admin", "Admin")}</div>}
+                                                            {u.status === 'suspended' && <div className="px-2 py-0.5 bg-red-500/10 text-red-600 dark:text-red-400 rounded text-[8px] font-black uppercase tracking-widest">{t("suspended", "Avstängd")}</div>}
                                                         </div>
                                                         <div className="text-xs text-slate-500">{u.email}</div>
                                                     </div>
                                                 </div>
                                                 <div className="flex items-center gap-3">
                                                     <div className="flex items-center gap-2 mr-6 px-4 py-2 bg-white dark:bg-slate-900/40 rounded-2xl border border-slate-200 dark:border-slate-800/50 shadow-sm">
-                                                        <button onClick={() => handleToggleInterviewAccess(u.uid)} title={u.canUseInterview ? "Ta bort tillgång till Intervju" : "Ge tillgång till Intervju"} className={`p-2.5 rounded-xl transition-all ${u.canUseInterview ? 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-400/10' : 'text-slate-400 hover:text-emerald-600'}`}>{u.canUseInterview ? <Mic className="w-4 h-4" /> : <MicOff className="w-4 h-4" />}</button>
-                                                        <button onClick={() => handleToggleStatus(u.uid)} title={u.status === 'active' ? "Stäng av konto" : "Aktivera konto"} className={`p-2.5 rounded-xl transition-all ${u.status === 'active' ? 'text-slate-400 hover:text-red-600' : 'text-red-600'}`}>{u.status === 'active' ? <UserMinus className="w-4 h-4" /> : <UserCheck className="w-4 h-4" />}</button>
-                                                        <button onClick={() => handleToggleRole(u.uid)} title={u.role === 'coach' ? "Gör till admin" : "Nedgradera till coach"} className={`p-2.5 rounded-xl transition-all ${u.role === 'admin' ? 'text-brand-500 dark:text-indigo-400' : 'text-slate-400 hover:text-brand-500'}`}><Shield className="w-4 h-4" /></button>
-                                                        <button onClick={() => handleToggleMatchingAccess(u.uid)} title={u.canUseMatching ? "Ta bort Savå-behörighet" : "Ge Savå-behörighet"} className={`p-2.5 rounded-xl transition-all ${u.canUseMatching ? 'text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-400/10' : 'text-slate-400 hover:text-purple-600'}`}><Search className="w-4 h-4" /></button>
-                                                        <button onClick={() => handleResetPassword(u.email)} title="Nollställ lösenord" className="p-2.5 text-slate-400 hover:text-amber-500 transition-all rounded-xl"><Key className="w-4 h-4" /></button>
+                                                        <button onClick={() => handleToggleInterviewAccess(u.uid)} title={u.canUseInterview ? t("remove_interview_access", "Ta bort tillgång till Intervju") : t("grant_interview_access", "Ge tillgång till Intervju")} className={`p-2.5 rounded-xl transition-all ${u.canUseInterview ? 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-400/10' : 'text-slate-400 hover:text-emerald-600'}`}>{u.canUseInterview ? <Mic className="w-4 h-4" /> : <MicOff className="w-4 h-4" />}</button>
+                                                        <button onClick={() => handleToggleStatus(u.uid)} title={u.status === 'active' ? t("suspend_account", "Stäng av konto") : t("activate_account", "Aktivera konto")} className={`p-2.5 rounded-xl transition-all ${u.status === 'active' ? 'text-slate-400 hover:text-red-600' : 'text-red-600'}`}>{u.status === 'active' ? <UserMinus className="w-4 h-4" /> : <UserCheck className="w-4 h-4" />}</button>
+                                                        <button onClick={() => handleToggleRole(u.uid)} title={u.role === 'coach' ? t("make_admin", "Gör till admin") : t("demote_to_coach", "Nedgradera till coach")} className={`p-2.5 rounded-xl transition-all ${u.role === 'admin' ? 'text-brand-500 dark:text-indigo-400' : 'text-slate-400 hover:text-brand-500'}`}><Shield className="w-4 h-4" /></button>
+                                                        <button onClick={() => handleToggleMatchingAccess(u.uid)} title={u.canUseMatching ? t("remove_sava_access", "Ta bort Savå-behörighet") : t("grant_sava_access", "Ge Savå-behörighet")} className={`p-2.5 rounded-xl transition-all ${u.canUseMatching ? 'text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-400/10' : 'text-slate-400 hover:text-purple-600'}`}><Search className="w-4 h-4" /></button>
+                                                        <button onClick={() => handleResetPassword(u.email)} title={t("reset_password", "Nollställ lösenord")} className="p-2.5 text-slate-400 hover:text-amber-500 transition-all rounded-xl"><Key className="w-4 h-4" /></button>
                                                         <button
                                                             onClick={() => {
                                                                 setConfirmDialog({
                                                                     isOpen: true,
-                                                                    title: 'Radera coach',
-                                                                    message: `Är du säker på att du vill radera ${u.displayName} (${u.email})? Detta tar bort kontot permanent från systemet.`,
+                                                                    title: t('delete_coach_title', 'Radera coach'),
+                                                                    message: t('delete_coach_confirm', 'Är du säker på att du vill radera {name} ({email})? Detta tar bort kontot permanent från systemet.').replace('{name}', u.displayName || '').replace('{email}', u.email || ''),
                                                                     onConfirm: async () => {
                                                                         try {
                                                                             // Delete from Firestore (profiles and whitelist)
@@ -1248,7 +1248,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                             onUpdateUsers(updatedUsers);
 
                                                                             setConfirmDialog(null);
-                                                                            alert(`${u.displayName} har raderats från systemet.`);
+                                                                            alert(t('coach_deleted_success', '{name} har raderats från systemet.').replace('{name}', u.displayName || ''));
                                                                         } catch (error) {
                                                                             console.error('Error deleting coach:', error);
                                                                             alert(`Fel vid radering: ${error instanceof Error ? error.message : 'Okänt fel'}`);
@@ -1260,13 +1260,13 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                     }
                                                                 });
                                                             }}
-                                                            title="Radera coach"
+                                                            title={t("delete_coach", "Radera coach")}
                                                             className="p-2.5 text-slate-400 hover:text-red-600 transition-all rounded-xl"
                                                         >
                                                             <Trash2 className="w-4 h-4" />
                                                         </button>
                                                     </div>
-                                                    <button onClick={() => onViewAsCoach?.(u)} className="p-3 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:text-brand-400 rounded-xl transition-all flex items-center gap-2 text-[10px] font-black uppercase tracking-widest"><Eye className="w-4 h-4" /> Visa</button>
+                                                    <button onClick={() => onViewAsCoach?.(u)} className="p-3 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:text-brand-400 rounded-xl transition-all flex items-center gap-2 text-[10px] font-black uppercase tracking-widest"><Eye className="w-4 h-4" /> {t("view", "Visa")}</button>
                                                 </div>
                                             </div>
                                         ))}
@@ -1275,8 +1275,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                 <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-slate-300">
                                                     <Search className="w-8 h-8" />
                                                 </div>
-                                                <div className="text-slate-400 font-medium italic">Hittade inga coacher som matchar "{searchTerm}"</div>
-                                                <button onClick={() => setSearchTerm('')} className="text-xs font-black uppercase tracking-widest text-brand-400 hover:text-brand-500 transition-colors">Rensa sökning</button>
+                                                <div className="text-slate-400 font-medium italic">{t("no_coaches_found", 'Hittade inga coacher som matchar "{searchTerm}"').replace("{searchTerm}", searchTerm)}</div>
+                                                <button onClick={() => setSearchTerm('')} className="text-xs font-black uppercase tracking-widest text-brand-400 hover:text-brand-500 transition-colors">{t("clear_search", "Rensa sökning")}</button>
                                             </div>
                                         )}
                                     </div>
