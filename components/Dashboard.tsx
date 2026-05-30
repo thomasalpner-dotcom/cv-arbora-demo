@@ -691,16 +691,16 @@ export const Dashboard: React.FC<Props> = ({
                 <div className="fixed inset-0 z-[150] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
                     <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden border border-white/20">
                         <div className="p-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gray-50/50 dark:bg-gray-900/50">
-                            <h2 className="text-xs font-black uppercase tracking-[0.2em]">{editingParticipant ? 'Redigera Deltagare' : 'Ny Deltagare'}</h2>
+                            <h2 className="text-xs font-black uppercase tracking-[0.2em]">{editingParticipant ? t('edit_participant') : t('new_participant')}</h2>
                             <button onClick={() => setShowParticipantModal(false)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"><X className="w-5 h-5" /></button>
                         </div>
                         <form onSubmit={handleSaveParticipantForm} className="p-6 space-y-4">
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-1"><label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Förnamn</label><input required value={formP.firstName} onChange={e => setFormP({ ...formP, firstName: e.target.value })} className="w-full p-3 bg-gray-50 dark:bg-gray-900 border border-transparent focus:border-brand-400 rounded-xl outline-none font-bold shadow-sm" /></div>
-                                <div className="space-y-1"><label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Efternamn</label><input required value={formP.lastName} onChange={e => setFormP({ ...formP, lastName: e.target.value })} className="w-full p-3 bg-gray-50 dark:bg-gray-900 border border-transparent focus:border-brand-400 rounded-xl outline-none font-bold shadow-sm" /></div>
+                                <div className="space-y-1"><label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">{t('first_name')}</label><input required value={formP.firstName} onChange={e => setFormP({ ...formP, firstName: e.target.value })} className="w-full p-3 bg-gray-50 dark:bg-gray-900 border border-transparent focus:border-brand-400 rounded-xl outline-none font-bold shadow-sm" /></div>
+                                <div className="space-y-1"><label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">{t('last_name')}</label><input required value={formP.lastName} onChange={e => setFormP({ ...formP, lastName: e.target.value })} className="w-full p-3 bg-gray-50 dark:bg-gray-900 border border-transparent focus:border-brand-400 rounded-xl outline-none font-bold shadow-sm" /></div>
                             </div>
-                            <div className="space-y-1"><label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">E-post</label><input type="email" value={formP.email} onChange={e => setFormP({ ...formP, email: e.target.value })} className="w-full p-3 bg-gray-50 dark:bg-gray-900 border border-transparent focus:border-brand-400 rounded-xl outline-none font-bold shadow-sm" placeholder="namn@exempel.se" /></div>
-                            <div className="space-y-1"><label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Telefon</label><input value={formP.phone} onChange={e => setFormP({ ...formP, phone: e.target.value })} className="w-full p-3 bg-gray-50 dark:bg-gray-900 border border-transparent focus:border-brand-400 rounded-xl outline-none font-bold shadow-sm" placeholder="070-000 00 00" /></div>
+                            <div className="space-y-1"><label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">{t('email')}</label><input type="email" value={formP.email} onChange={e => setFormP({ ...formP, email: e.target.value })} className="w-full p-3 bg-gray-50 dark:bg-gray-900 border border-transparent focus:border-brand-400 rounded-xl outline-none font-bold shadow-sm" placeholder="namn@exempel.se" /></div>
+                            <div className="space-y-1"><label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">{t('phone')}</label><input value={formP.phone} onChange={e => setFormP({ ...formP, phone: e.target.value })} className="w-full p-3 bg-gray-50 dark:bg-gray-900 border border-transparent focus:border-brand-400 rounded-xl outline-none font-bold shadow-sm" placeholder="070-000 00 00" /></div>
 
                             {!editingParticipant && (
                                 <div className="pt-4 border-t border-gray-100 dark:border-gray-700">
@@ -712,14 +712,14 @@ export const Dashboard: React.FC<Props> = ({
                                             className="mt-1 w-4 h-4 text-brand-400 border-gray-300 rounded focus:ring-brand-400"
                                         />
                                         <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                                            Jag bekräftar att deltagaren har gett sitt samtycke enligt GDPR för behandling av personuppgifter i syfte att skapa CV och ansökningshandlingar.
+                                            {t('gdpr_consent_text')}
                                         </span>
                                     </label>
                                 </div>
                             )}
 
                             <div className="pt-2 flex gap-4">
-                                <button type="button" onClick={() => setShowParticipantModal(false)} className="px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-500 rounded-xl font-black uppercase tracking-widest text-[10px]">Avbryt</button>
+                                <button type="button" onClick={() => setShowParticipantModal(false)} className="px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-500 rounded-xl font-black uppercase tracking-widest text-[10px]">{t('cancel')}</button>
                                 <button
                                     type="submit"
                                     disabled={isSaving || (!editingParticipant && !gdprConsent)}
@@ -728,7 +728,7 @@ export const Dashboard: React.FC<Props> = ({
                                         : 'bg-brand-400 text-white shadow-brand-400/20 hover:bg-brand-500'
                                         }`}
                                 >
-                                    {isSaving ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : 'Spara Deltagare'}
+                                    {isSaving ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : t('save_participant')}
                                 </button>
                             </div>
                         </form>
@@ -960,12 +960,14 @@ export const Dashboard: React.FC<Props> = ({
                                         )}
                                     </div>
                                 )}
+                                {/* 
                                 {canUseInterview && (
                                     <button onClick={() => setShowInterviewModal(true)} className="bg-brand-50 hover:bg-brand-100 text-brand-500 border border-brand-100 px-8 py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] flex items-center gap-3 transition-all relative">
                                         <Mic className="w-5 h-5" /> {t('agneta_interview') || 'Agneta Intervju'}
                                         <span className="absolute -top-2 -right-2 bg-brand-400 text-white text-[7px] px-1.5 py-0.5 rounded-md shadow-sm">BETA</span>
                                     </button>
                                 )}
+                                */}
                                 <button 
                                     onClick={() => setIsAIImportModalOpen(true)} 
                                     className="bg-brand-50 hover:bg-brand-100 text-brand-500 border border-brand-100 px-8 py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] flex items-center gap-3 transition-all shadow-sm hover:shadow-md"

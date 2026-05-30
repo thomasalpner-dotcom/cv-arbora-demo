@@ -381,6 +381,7 @@ export interface SystemSettings {
   // Feature Toggles
   allowBulkImportForCoaches?: boolean; // Allow coaches to bulk import CVs during onboarding
   disableEmailVerification?: boolean; // Inaktivera krav på e-postverifiering (t.ex. för demos)
+  allowOpenAdminRegistration?: boolean; // Demo flagga: alla får admin-konto
 }
 
 export interface EmailTemplate {
@@ -424,5 +425,6 @@ export const INITIAL_SYSTEM_SETTINGS: SystemSettings = {
       body: 'Hej {{PARTICIPANT_NAME}},\n\nBifogat hittar du ditt personliga brev.\n\nVänliga hälsningar,\n{{COACH_NAME}}'
     }
   },
-  allowBulkImportForCoaches: true
+  allowBulkImportForCoaches: true,
+  allowOpenAdminRegistration: false
 };

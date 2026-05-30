@@ -2,6 +2,7 @@ import React, { useMemo, useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { UserProfile, ResumeData, Participant, CustomTemplate, MasterTemplateConfig, DEFAULT_MASTER_CONFIG, INITIAL_RESUME, PhotoPosition, StockImage } from '../types';
 import { Shield, ShieldAlert, Check, Search, User, ArrowLeft, TrendingUp, Users, FileText, Ban, Key, Activity, Calendar, MoreHorizontal, UserMinus, UserCheck, Eye, ShieldCheck, Plus, X, Loader2, Trash2, Mail, Phone, ExternalLink, Wand2, Upload, Palette, Layout, Settings, Layers, Save, CheckCircle2, AlertTriangle, Image as ImageIcon, RefreshCcw, Sparkles, MessageSquare, Database, Move, Printer, Download, Mic, MicOff, Sun, Moon, LayoutDashboard, LogOut, Brain, ChevronDown, ChevronRight, Briefcase, GraduationCap } from 'lucide-react';
+import { useTranslation } from '../utils/translations';
 import { MasterTemplate } from './CvTemplates';
 import { BackButton } from './BackButton';
 import { AuthService } from '../services/AuthService';
@@ -131,6 +132,7 @@ const SubNavItem = ({ label, active, onClick }: { label: string, active: boolean
 );
 
 export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, participants, onUpdateUsers, onBack, onViewAsCoach, isDarkMode, toggleDarkMode, systemSettings }) => {
+    const { t } = useTranslation();
     const [activeTab, setActiveTab] = useState<AdminTab>('overview');
     const [isSettingsExpanded, setIsSettingsExpanded] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
@@ -245,7 +247,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                 withCoverLetter: { subject: 'Ditt personliga brev - {{PARTICIPANT_FULLNAME}}', body: 'Hej {{PARTICIPANT_NAME}},\n\nBifogat hittar du ditt personliga brev.\n\nVänliga hälsningar,\n{{COACH_NAME}}' }
             },
             allowBulkImportForCoaches: systemSettings.allowBulkImportForCoaches !== false,
-            disableEmailVerification: systemSettings.disableEmailVerification || false
+            disableEmailVerification: systemSettings.disableEmailVerification || false,
+            allowOpenAdminRegistration: systemSettings.allowOpenAdminRegistration || false
         });
         setIsCustomModel(!isPreset && !!systemSettings.geminiModel);
 
@@ -666,7 +669,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                 logoUrl: aiForm.logoUrl,
                 emailTemplates: aiForm.emailTemplates,
                 allowBulkImportForCoaches: aiForm.allowBulkImportForCoaches,
-                disableEmailVerification: aiForm.disableEmailVerification
+                disableEmailVerification: aiForm.disableEmailVerification,
+                allowOpenAdminRegistration: aiForm.allowOpenAdminRegistration
             };
             console.log("Saving settings:", updated);
             await SettingsService.updateSettings(updated);
@@ -979,26 +983,26 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                 </div>
 
                 <div className="p-6 border-b border-slate-100 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50">
-                    <BackButton onClick={onBack} label="Gå tillbaka" variant="sidebar" />
+                    <BackButton onClick={onBack} label={t("go_back") || "Gå tillbaka"} variant="sidebar" />
                 </div>
 
                 <nav className="flex-1 p-6 space-y-2 overflow-y-auto custom-scrollbar">
                     <div className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-4 px-2">Huvudmeny</div>
                     <NavItem icon={<LayoutDashboard />} label="Översikt" active={activeTab === 'overview'} onClick={() => setActiveTab('overview')} />
-                    <NavItem icon={<Users />} label="Coacher" active={activeTab === 'coaches'} onClick={() => setActiveTab('coaches')} badge={stats.activeCoaches} />
+                    <NavItem icon={<Users />} label={t("coaches") || "Coacher"} active={activeTab === 'coaches'} onClick={() => setActiveTab('coaches')} badge={stats.activeCoaches} />
 
-                    <div className="pt-8 text-[9px] font-black text-slate-400 uppercase tracking-widest mb-4 px-2">Verktyg</div>
-                    <NavItem icon={<Palette />} label="Mall-Labbet" active={activeTab === 'templates'} onClick={() => setActiveTab('templates')} badge={customTemplates.length} />
-                    <NavItem icon={<ImageIcon />} label="Bildbibliotek" active={activeTab === 'stock'} onClick={() => setActiveTab('stock')} />
+                    <div className="pt-8 text-[9px] font-black text-slate-400 uppercase tracking-widest mb-4 px-2">{t("tools") || "Verktyg"}</div>
+                    <NavItem icon={<Palette />} label={t("template_lab") || "Mall-Labbet"} active={activeTab === 'templates'} onClick={() => setActiveTab('templates')} badge={customTemplates.length} />
+                    <NavItem icon={<ImageIcon />} label={t("image_library") || "Bildbibliotek"} active={activeTab === 'stock'} onClick={() => setActiveTab('stock')} />
 
-                    <div className="pt-8 text-[9px] font-black text-slate-400 uppercase tracking-widest mb-4 px-2">Innehåll</div>
-                    <NavItem icon={<ShieldAlert />} label="Väntelista" active={activeTab === 'whitelist'} onClick={() => setActiveTab('whitelist')} badge={whitelist.length} />
-                    <NavItem icon={<Database />} label="Importera Arkiv" active={activeTab === 'import'} onClick={() => setActiveTab('import')} />
+                    <div className="pt-8 text-[9px] font-black text-slate-400 uppercase tracking-widest mb-4 px-2">{t("content_section") || "Innehåll"}</div>
+                    <NavItem icon={<ShieldAlert />} label={t("whitelist") || "Väntelista"} active={activeTab === 'whitelist'} onClick={() => setActiveTab('whitelist')} badge={whitelist.length} />
+                    <NavItem icon={<Database />} label={t("import_archive") || "Importera Arkiv"} active={activeTab === 'import'} onClick={() => setActiveTab('import')} />
 
-                    <div className="pt-8 text-[9px] font-black text-slate-400 uppercase tracking-widest mb-4 px-2">Konfiguration</div>
+                    <div className="pt-8 text-[9px] font-black text-slate-400 uppercase tracking-widest mb-4 px-2">{t("configuration") || "Konfiguration"}</div>
                     <NavItem
                         icon={<Settings />}
-                        label="Inställningar"
+                        label={t("settings") || "Inställningar"}
                         active={activeTab === 'settings'}
                         onClick={() => {
                             setActiveTab('settings');
@@ -1010,7 +1014,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                     {isSettingsExpanded && (
                         <div className="mt-1 space-y-1 animate-in slide-in-from-top-2 duration-200">
                             <SubNavItem
-                                label="Företag & Branding"
+                                label={t("company_branding") || "Företag & Branding"}
                                 active={activeTab === 'settings' && settingsSubTab === 'branding'}
                                 onClick={() => {
                                     setActiveTab('settings');
@@ -1018,7 +1022,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                 }}
                             />
                             <SubNavItem
-                                label="Säkerhet & Åtkomst"
+                                label={t("security_access") || "Säkerhet & Åtkomst"}
                                 active={activeTab === 'settings' && settingsSubTab === 'security'}
                                 onClick={() => {
                                     setActiveTab('settings');
@@ -1026,7 +1030,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                 }}
                             />
                             <SubNavItem
-                                label="AI-Profiler"
+                                label={t("ai_profiles") || "AI-Profiler"}
                                 active={activeTab === 'settings' && settingsSubTab === 'avatar'}
                                 onClick={() => {
                                     setActiveTab('settings');
@@ -1034,7 +1038,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                 }}
                             />
                             <SubNavItem
-                                label="AI-Instruktioner"
+                                label={t("ai_instructions") || "AI-Instruktioner"}
                                 active={activeTab === 'settings' && settingsSubTab === 'prompts'}
                                 onClick={() => {
                                     setActiveTab('settings');
@@ -1042,7 +1046,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                 }}
                             />
                             <SubNavItem
-                                label="API & Teknik"
+                                label={t("api_tech") || "API & Teknik"}
                                 active={activeTab === 'settings' && settingsSubTab === 'api'}
                                 onClick={() => {
                                     setActiveTab('settings');
@@ -1052,7 +1056,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                         </div>
                     )}
 
-                    <NavItem icon={<Mail />} label="E-postmallar" active={activeTab === 'emailTemplates'} onClick={() => setActiveTab('emailTemplates')} />
+                    <NavItem icon={<Mail />} label={t("email_templates") || "E-postmallar"} active={activeTab === 'emailTemplates'} onClick={() => setActiveTab('emailTemplates')} />
                 </nav>
             </aside>
 
@@ -1063,7 +1067,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                     <div className="flex items-center gap-6">
                         <div className="flex flex-col">
                             <h2 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">
-                                {activeTab === 'overview' ? 'Aventus Översikt' :
+                                {activeTab === 'overview' ? (t('aventus_overview') || 'Aventus Översikt') :
                                     activeTab === 'coaches' ? 'Hantera Coacher' :
                                         activeTab === 'whitelist' ? 'Godkända E-post' :
                                             activeTab === 'stock' ? 'Bildbibliotek' :
@@ -1082,7 +1086,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                 }
                             </h2>
                             <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none mt-1">
-                                {activeTab === 'overview' ? 'Systemstatus och realtidsdata' :
+                                {activeTab === 'overview' ? (t('system_status_realtime') || 'Systemstatus och realtidsdata') :
                                     activeTab === 'coaches' ? 'Administrera användarkonton' :
                                         activeTab === 'whitelist' ? 'Hantera access-listan' :
                                             activeTab === 'stock' ? 'Publicera bilder för coacher' :
@@ -1156,27 +1160,27 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 rounded-[2.5rem] shadow-sm dark:shadow-2xl relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 p-6 opacity-5 dark:opacity-10 group-hover:opacity-20 transition-opacity text-slate-900 dark:text-white"><FileText className="w-20 h-20" /></div>
-                                <h3 className="text-slate-500 font-black text-[10px] uppercase tracking-widest mb-4">Sökbara CV:n</h3>
+                                <h3 className="text-slate-500 font-black text-[10px] uppercase tracking-widest mb-4">{t('searchable_cvs') || 'Sökbara CV:n'}</h3>
                                 <div className="text-5xl font-black tracking-tighter mb-2 text-slate-900 dark:text-white">{stats.totalResumes}</div>
-                                <div className="text-[10px] font-black text-brand-400 uppercase tracking-widest leading-none">Egenskapade & Importerade</div>
+                                <div className="text-[10px] font-black text-brand-400 uppercase tracking-widest leading-none">{t('self_created_imported') || 'Egenskapade & Importerade'}</div>
                             </div>
                             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 rounded-[2.5rem] shadow-sm dark:shadow-2xl relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 p-6 opacity-5 dark:opacity-10 group-hover:opacity-20 transition-opacity text-slate-900 dark:text-white"><Layers className="w-20 h-20" /></div>
-                                <h3 className="text-slate-500 font-black text-[10px] uppercase tracking-widest mb-4">Egna Mallar</h3>
+                                <h3 className="text-slate-500 font-black text-[10px] uppercase tracking-widest mb-4">{t('own_templates') || 'Egna Mallar'}</h3>
                                 <div className="text-5xl font-black tracking-tighter mb-2 text-slate-900 dark:text-white">{customTemplates.length}</div>
-                                <div className="text-[10px] font-black text-emerald-500 uppercase tracking-widest leading-none">Publicerade layouter</div>
+                                <div className="text-[10px] font-black text-emerald-500 uppercase tracking-widest leading-none">{t('published_layouts') || 'Publicerade layouter'}</div>
                             </div>
                             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 rounded-[2.5rem] shadow-sm dark:shadow-2xl relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 p-6 opacity-5 dark:opacity-10 group-hover:opacity-20 transition-opacity text-slate-900 dark:text-white"><Users className="w-20 h-20" /></div>
-                                <h3 className="text-slate-500 font-black text-[10px] uppercase tracking-widest mb-4">Aktiva Coacher</h3>
+                                <h3 className="text-slate-500 font-black text-[10px] uppercase tracking-widest mb-4">{t('active_coaches') || 'Aktiva Coacher'}</h3>
                                 <div className="text-5xl font-black tracking-tighter mb-2 text-slate-900 dark:text-white">{stats.activeCoaches}</div>
-                                <div className="text-[10px] font-black text-amber-500 uppercase tracking-widest leading-none">Licensierade användare</div>
+                                <div className="text-[10px] font-black text-amber-500 uppercase tracking-widest leading-none">{t('licensed_users') || 'Licensierade användare'}</div>
                             </div>
                             <div className="bg-gradient-to-br from-brand-500 to-violet-700 p-8 rounded-[2.5rem] shadow-xl text-white relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 p-6 opacity-20"><TrendingUp className="w-20 h-20" /></div>
-                                <h3 className="text-indigo-200 font-black text-[10px] uppercase tracking-widest mb-4">Senaste 30 dagarna</h3>
+                                <h3 className="text-indigo-200 font-black text-[10px] uppercase tracking-widest mb-4">{t('last_30_days') || 'Senaste 30 dagarna'}</h3>
                                 <div className="text-5xl font-black tracking-tighter mb-2">{stats.recentResumes}</div>
-                                <div className="text-[10px] font-black text-indigo-200 uppercase tracking-widest leading-none">Nya CV:n skapade</div>
+                                <div className="text-[10px] font-black text-indigo-200 uppercase tracking-widest leading-none">{t('new_cvs_created') || 'Nya CV:n skapade'}</div>
                             </div>
                         </div>
                     )}
@@ -1775,6 +1779,22 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                     <div className="text-[10px] text-slate-500 font-medium">Godkänner alla nya konton direkt utan att de behöver klicka på en bekräftelselänk i sin e-post. Perfekt för presentationer.</div>
                                                                 </div>
                                                             </label>
+
+                                                            <label className="flex items-center gap-4 p-5 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-all group mt-4">
+                                                                <div className={`w-12 h-6 rounded-full relative transition-colors ${aiForm.allowOpenAdminRegistration ? 'bg-amber-500' : 'bg-slate-300'}`}>
+                                                                    <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${aiForm.allowOpenAdminRegistration ? 'left-7' : 'left-1'}`}></div>
+                                                                </div>
+                                                                <input
+                                                                    type="checkbox"
+                                                                    className="hidden"
+                                                                    checked={aiForm.allowOpenAdminRegistration}
+                                                                    onChange={(e) => setAiForm({ ...aiForm, allowOpenAdminRegistration: e.target.checked })}
+                                                                />
+                                                                <div className="flex-1">
+                                                                    <div className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">{t('allow_open_admin') || 'Tillåt öppen Admin-registrering (Demo)'}</div>
+                                                                    <div className="text-[10px] text-slate-500 font-medium">{t('allow_open_admin_desc') || 'När detta är påslaget får alla nya användare automatiskt admin-rättigheter.'}</div>
+                                                                </div>
+                                                            </label>
                                                         </div>
 
                                                         <div className="pt-4 border-t border-slate-50 dark:border-slate-800">
@@ -1838,9 +1858,9 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                             </div>
 
                                                             <div className="flex-1 space-y-4">
-                                                                <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Företagets Logotyp</h4>
+                                                                <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">{t("company_logo") || "Företagets Logotyp"}</h4>
                                                                 <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                                                                    Ladda upp din logotyp för att ersätta standard-ikonen på startsidan och i programmet.
+                                                                    {t("company_logo_desc") || "Ladda upp din logotyp för att ersätta standard-ikonen på startsidan och i programmet."}
                                                                 </p>
                                                                 <div className="flex gap-4">
                                                                     <input
@@ -1878,7 +1898,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                         className="px-6 py-3 bg-brand-400 text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand-400/20 hover:bg-brand-500 transition-all flex items-center gap-2"
                                                                     >
                                                                         <Upload className="w-4 h-4" />
-                                                                        {isSaving ? 'Laddar upp...' : 'Ladda upp logotyp'}
+                                                                        {isSaving ? (t('uploading') || 'Laddar upp...') : (t('upload_logo') || 'Ladda upp logotyp')}
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -1886,7 +1906,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
 
                                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-slate-100 dark:border-slate-800">
                                                             <div className="space-y-2">
-                                                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Företagsnamn</label>
+                                                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">{t("company_name") || "Företagsnamn"}</label>
                                                                 <input
                                                                     type="text"
                                                                     value={aiForm.companyName}
@@ -1896,7 +1916,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                 />
                                                             </div>
                                                             <div className="space-y-2">
-                                                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Primärfärg (Hex)</label>
+                                                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">{t("primary_color") || "Primärfärg (Hex)"}</label>
                                                                 <div className="flex gap-3">
                                                                     <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-700 shrink-0" style={{ backgroundColor: aiForm.primaryColor }}></div>
                                                                     <input
@@ -1911,9 +1931,9 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                         </div>
 
                                                         <div className="space-y-4 pt-4 border-t border-slate-100 dark:border-slate-800">
-                                                            <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Startsida (Landing Page)</h4>
+                                                            <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t("landing_page") || "Startsida (Landing Page)"}</h4>
                                                             <div className="space-y-2">
-                                                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Huvudrubrik</label>
+                                                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">{t("main_heading") || "Huvudrubrik"}</label>
                                                                 <input
                                                                     type="text"
                                                                     value={aiForm.landingTitle}
@@ -1922,7 +1942,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                 />
                                                             </div>
                                                             <div className="space-y-2">
-                                                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Undertext</label>
+                                                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">{t("sub_text") || "Undertext"}</label>
                                                                 <textarea
                                                                     value={aiForm.landingSubtitle}
                                                                     onChange={(e) => setAiForm({ ...aiForm, landingSubtitle: e.target.value })}
@@ -1938,7 +1958,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                 className={`px-8 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 shadow-xl ${showSaveSuccess ? 'bg-emerald-500 text-white shadow-emerald-500/20' : 'bg-brand-500 text-white hover:bg-indigo-700 shadow-brand-500/20'}`}
                                                             >
                                                                 {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : showSaveSuccess ? <Check className="w-4 h-4" /> : <Save className="w-4 h-4" />}
-                                                                {showSaveSuccess ? 'Sparat' : 'Spara Branding'}
+                                                                {showSaveSuccess ? 'Sparat' : t('save_branding') || 'Spara Branding'}
                                                             </button>
                                                         </div>
                                                     </div>
@@ -1981,7 +2001,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                 </div>
                                                 <div className="bg-white dark:bg-slate-800 rounded-xl p-3">
                                                     <code className="text-xs font-bold text-brand-600">{'{{COMPANY_NAME}}'}</code>
-                                                    <p className="text-[10px] text-slate-500 mt-1">Företagsnamn</p>
+                                                    <p className="text-[10px] text-slate-500 mt-1">{t("company_name") || "Företagsnamn"}</p>
                                                 </div>
                                             </div>
                                         </div>

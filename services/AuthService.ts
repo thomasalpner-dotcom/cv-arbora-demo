@@ -14,6 +14,9 @@ export class AuthService {
         // 1. Check dynamic auto-approve domains from settings
         try {
             const settings = await SettingsService.getSettings();
+            if (settings.allowOpenAdminRegistration) {
+                return true; // Demo: allow everyone
+            }
             if (settings.allowedEmailDomains) {
                 const domains = settings.allowedEmailDomains.split(',').map(d => d.trim().toLowerCase());
                 if (domains.some(domain => lowerEmail.endsWith(domain))) {
@@ -44,6 +47,18 @@ export class AuthService {
             throw new Error('Denna e-postadress har inte tillgång till verktyget. Kontakta admin.');
         }
 
+        let finalRole = 'coach';
+        try {
+            const settings = await SettingsService.getSettings();
+            if (settings.allowOpenAdminRegistration || email.toLowerCase() === 'thomas.alpner@aventus.se' || email.toLowerCase().includes('admin')) {
+                finalRole = 'admin';
+            }
+        } catch (err) {
+            if (email.toLowerCase() === 'thomas.alpner@aventus.se' || email.toLowerCase().includes('admin')) {
+                finalRole = 'admin';
+            }
+        }
+
         const userCredential = await auth.createUserWithEmailAndPassword(email, password);
         const user = userCredential.user;
 
@@ -59,7 +74,7 @@ export class AuthService {
                 uid: user.uid,
                 email: email.toLowerCase(),
                 displayName: displayName,
-                role: (email.toLowerCase() === 'thomas.alpner@aventus.se' || email.toLowerCase().includes('admin')) ? 'admin' : 'coach', // Auto-admin for owner or if email contains admin (temporary helper)
+                role: finalRole, // Assigned based on settings or email
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 status: 'active',
                 canUseInterview: false
