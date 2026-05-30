@@ -14,6 +14,10 @@ export const LANGUAGES: { code: Language; name: string; flag: string }[] = [
 
 export const translations: Record<Language, Record<string, string>> = {
   sv: {
+    "publish_images_subtitle": "Publicera bilder för coacher",
+    "add_image": "Lägg till bild",
+    "image_library_empty": "Bildbiblioteket är tomt.",
+    "error_loading_image_library": "Kunde inte ladda bildbiblioteket",
     "template_lab_subtitle": "Skapa CV-layouter",
     "ai_clone": "AI-Klona",
     "new_template": "Ny Mall",
@@ -521,6 +525,10 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Skriv ditt meddelande..."
   },
   en: {
+    "publish_images_subtitle": "Publish images for coaches",
+    "add_image": "Add image",
+    "image_library_empty": "The image library is empty.",
+    "error_loading_image_library": "Could not load the image library",
     "template_lab_subtitle": "Create CV layouts",
     "ai_clone": "AI-Clone",
     "new_template": "New Template",
@@ -1028,6 +1036,10 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Write your message..."
   },
   de: {
+    "publish_images_subtitle": "Bilder für Coaches veröffentlichen",
+    "add_image": "Bild hinzufügen",
+    "image_library_empty": "Die Bildbibliothek ist leer.",
+    "error_loading_image_library": "Bildbibliothek konnte nicht geladen werden",
     "template_lab_subtitle": "CV-Layouts erstellen",
     "ai_clone": "KI-Klonen",
     "new_template": "Neue Vorlage",
@@ -1533,6 +1545,10 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Schreiben Sie Ihre Nachricht..."
   },
   fi: {
+    "publish_images_subtitle": "Julkaise kuvia valmentajille",
+    "add_image": "Lisää kuva",
+    "image_library_empty": "Kuvakirjasto on tyhjä.",
+    "error_loading_image_library": "Kuvakirjaston lataaminen epäonnistui",
     "template_lab_subtitle": "Luo CV-asetteluja",
     "ai_clone": "Tekoäly-kloonaus",
     "new_template": "Uusi malli",
@@ -2038,6 +2054,10 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Kirjoita viestisi..."
   },
   da: {
+    "publish_images_subtitle": "Offentliggør billeder til coaches",
+    "add_image": "Tilføj billede",
+    "image_library_empty": "Billedbiblioteket er tomt.",
+    "error_loading_image_library": "Kunne ikke indlæse billedbiblioteket",
     "template_lab_subtitle": "Opret CV-layouts",
     "ai_clone": "AI-Klon",
     "new_template": "Ny Skabelon",
@@ -2543,6 +2563,10 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Skriv din besked..."
   },
   no: {
+    "publish_images_subtitle": "Publiser bilder for coacher",
+    "add_image": "Legg til bilde",
+    "image_library_empty": "Bildebiblioteket er tomt.",
+    "error_loading_image_library": "Kunne ikke laste bildebiblioteket",
     "template_lab_subtitle": "Opprett CV-layouter",
     "ai_clone": "AI-Klon",
     "new_template": "Ny Mal",
@@ -3050,6 +3074,10 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Skriv meldingen din..."
   },
   fr: {
+    "publish_images_subtitle": "Publier des images pour les coachs",
+    "add_image": "Ajouter une image",
+    "image_library_empty": "La bibliothèque d'images est vide.",
+    "error_loading_image_library": "Impossible de charger la bibliothèque d'images",
     "template_lab_subtitle": "Créer des mises en page de CV",
     "ai_clone": "Clonage IA",
     "new_template": "Nouveau Modèle",

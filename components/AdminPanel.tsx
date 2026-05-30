@@ -281,7 +281,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
             const imgs = await StockService.getStockImages();
             setStockImages(imgs);
         } catch (err) {
-            console.error("Kunde inte ladda bildbiblioteket");
+            console.error(t("error_loading_image_library", "Kunde inte ladda bildbiblioteket"));
         }
     };
 
@@ -1070,7 +1070,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                 {activeTab === 'overview' ? (t('aventus_overview') || 'Aventus Översikt') :
                                     activeTab === 'coaches' ? t('manage_coaches', 'Hantera Coacher') :
                                         activeTab === 'whitelist' ? 'Godkända E-post' :
-                                            activeTab === 'stock' ? 'Bildbibliotek' :
+                                            activeTab === 'stock' ? t('image_library', 'Bildbibliotek') :
                                                 activeTab === 'templates' ? t('template_lab', 'Mall-Labbet') :
                                                     activeTab === 'settings' ? (
                                                         <div className="flex items-center gap-2">
@@ -1089,7 +1089,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                 {activeTab === 'overview' ? (t('system_status_realtime') || 'Systemstatus och realtidsdata') :
                                     activeTab === 'coaches' ? t('manage_user_accounts', 'Administrera användarkonton') :
                                         activeTab === 'whitelist' ? 'Hantera access-listan' :
-                                            activeTab === 'stock' ? 'Publicera bilder för coacher' :
+                                            activeTab === 'stock' ? t('publish_images_subtitle', 'Publicera bilder för coacher') :
                                                 activeTab === 'templates' ? t('template_lab_subtitle', 'Skapa CV-layouter') :
                                                     activeTab === 'settings' ? t('global_configuration', 'Global konfiguration') : (t('manage_email_templates', 'Hantera e-postmallar'))}
                             </p>
@@ -1109,7 +1109,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                         ) : activeTab === 'whitelist' ? (
                             <button onClick={() => setIsAddModalOpen(true)} className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-emerald-600/20 hover:bg-emerald-700 transition-all"><Plus className="w-4 h-4" /> Godkänn E-post</button>
                         ) : activeTab === 'stock' ? (
-                            <button onClick={() => setIsStockModalOpen(true)} className="flex items-center gap-2 px-6 py-3 bg-brand-400 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand-400/20 hover:bg-brand-500 transition-all"><ImageIcon className="w-4 h-4" /> Lägg till bild</button>
+                            <button onClick={() => setIsStockModalOpen(true)} className="flex items-center gap-2 px-6 py-3 bg-brand-400 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand-400/20 hover:bg-brand-500 transition-all"><ImageIcon className="w-4 h-4" /> {t("add_image", "Lägg till bild")}</button>
                         ) : activeTab === 'templates' ? (
                             <div className="flex gap-3">
                                 <input type="file" ref={fileInputRef} className="hidden" accept="image/*,.pdf" onChange={handleCloneDesign} />
@@ -1393,7 +1393,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                             {stockImages.length === 0 && (
                                                 <div className="col-span-full p-20 text-center bg-slate-50 dark:bg-slate-800/10 rounded-[3rem] border-2 border-dashed border-slate-200 dark:border-slate-800">
                                                     <ImageIcon className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-                                                    <p className="text-slate-400 font-medium italic">Bildbiblioteket är tomt.</p>
+                                                    <p className="text-slate-400 font-medium italic">{t("image_library_empty", "Bildbiblioteket är tomt.")}</p>
                                                 </div>
                                             )}
                                         </div>
