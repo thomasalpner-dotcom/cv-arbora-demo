@@ -1446,7 +1446,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
 
                                                             <div className="flex-1 space-y-6">
                                                                 <div className="space-y-2">
-                                                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Assistentens Namn (T.ex. Agneta)</label>
+                                                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">{t("assistant_name_label", "Assistentens Namn (T.ex. Agneta)")}</label>
                                                                     <input
                                                                         type="text"
                                                                         value={aiForm.agnetaName}
@@ -1456,7 +1456,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                     />
                                                                 </div>
                                                                 <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                                                                    Ladda upp en bild för att ersätta standard-illustrationen. Denna bild kommer att visas i chatten och i design-assistenten.
+                                                                    {t("assistant_image_help", "Ladda upp en bild för att ersätta standard-illustrationen. Denna bild kommer att visas i chatten och i design-assistenten.")}
                                                                 </p>
                                                                 <div className="flex gap-4">
                                                                     <input
@@ -1476,7 +1476,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                                             await handleUpdateAgnetaAvatar(optimized);
                                                                                         } catch (err) {
                                                                                             console.error("Avatar upload error:", err);
-                                                                                            alert("Kunde inte ladda upp bilden.");
+                                                                                            alert(t("upload_image_error", "Kunde inte ladda upp bilden."));
                                                                                         } finally {
                                                                                             setIsSaving(false);
                                                                                         }
@@ -1494,7 +1494,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                         className="px-6 py-3 bg-brand-400 text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand-400/20 hover:bg-brand-500 transition-all flex items-center gap-2"
                                                                     >
                                                                         <Upload className="w-4 h-4" />
-                                                                        {isSaving ? 'Laddar upp...' : 'Ladda upp bild'}
+                                                                        {isSaving ? t('uploading_image', 'Laddar upp...') : t('upload_image_button', 'Ladda upp bild')}
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -1519,7 +1519,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
 
                                                             <div className="flex-1 space-y-6">
                                                                 <div className="space-y-2">
-                                                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Matcherings-AI Namn (T.ex. Savå)</label>
+                                                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">{t("matching_ai_name_label", "Matcherings-AI Namn (T.ex. Savå)")}</label>
                                                                     <input
                                                                         type="text"
                                                                         value={aiForm.savaName}
@@ -1529,7 +1529,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                     />
                                                                 </div>
                                                                 <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                                                                    Ladda upp en bild för att ersätta standard-illustrationen för Savå. Denna bild kommer att visas vid matchning och analys.
+                                                                    {t("matching_ai_image_help", "Ladda upp en bild för att ersätta standard-illustrationen för Savå. Denna bild kommer att visas vid matchning och analys.")}
                                                                 </p>
                                                                 <div className="flex gap-4">
                                                                     <input
@@ -1549,7 +1549,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                                             await handleUpdateSavaAvatar(optimized);
                                                                                         } catch (err) {
                                                                                             console.error("Avatar upload error:", err);
-                                                                                            alert("Kunde inte ladda upp bilden.");
+                                                                                            alert(t("upload_image_error", "Kunde inte ladda upp bilden."));
                                                                                         } finally {
                                                                                             setIsSaving(false);
                                                                                         }
@@ -1567,7 +1567,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                         className="px-6 py-3 bg-purple-500 text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-purple-500/20 hover:bg-purple-600 transition-all flex items-center gap-2"
                                                                     >
                                                                         <Upload className="w-4 h-4" />
-                                                                        {isSaving ? 'Laddar upp...' : 'Ladda upp bild'}
+                                                                        {isSaving ? t('uploading_image', 'Laddar upp...') : t('upload_image_button', 'Ladda upp bild')}
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -1592,8 +1592,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                             <Database className="w-6 h-6" />
                                                         </div>
                                                         <div className="flex-1">
-                                                            <h3 className="text-xl font-black text-slate-900 dark:text-white">Gemini AI Konfiguration</h3>
-                                                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Hantera API-nyckel och AI-modell</p>
+                                                            <h3 className="text-xl font-black text-slate-900 dark:text-white">{t("gemini_ai_configuration", "Gemini AI Konfiguration")}</h3>
+                                                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{t("manage_api_model", "Hantera API-nyckel och AI-modell")}</p>
                                                         </div>
                                                         <button
                                                             onClick={handleTestAiConnection}
@@ -1606,22 +1606,22 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
 
                                                     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 rounded-[2.5rem] space-y-8 shadow-sm">
                                                         <div className="space-y-2">
-                                                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Gemini API Nyckel</label>
+                                                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">{t("gemini_api_key_label", "Gemini API Nyckel")}</label>
                                                             <div className="relative">
                                                                 <input
                                                                     type="password"
                                                                     value={aiForm.geminiApiKey}
                                                                     onChange={(e) => setAiForm({ ...aiForm, geminiApiKey: e.target.value })}
                                                                     className="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-5 py-4 text-sm font-bold outline-none focus:ring-2 focus:ring-brand-400 text-slate-900 dark:text-white"
-                                                                    placeholder="Klistra in din API-nyckel här..."
+                                                                    placeholder={t("paste_api_key", "Klistra in din API-nyckel här...")}
                                                                 />
                                                                 <Key className="absolute right-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                                                             </div>
-                                                            <p className="text-[9px] text-slate-400 font-medium ml-1">Hämta din nyckel från <a href="https://aistudio.google.com/app/apikey" target="_blank" className="underline text-brand-400">Google AI Studio</a>.</p>
+                                                            <p className="text-[9px] text-slate-400 font-medium ml-1">{t("get_key_from", "Hämta din nyckel från")} <a href="https://aistudio.google.com/app/apikey" target="_blank" className="underline text-brand-400">Google AI Studio</a>.</p>
                                                         </div>
 
                                                         <div className="space-y-2">
-                                                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">AI Modell</label>
+                                                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">{t("ai_model_label", "AI Modell")}</label>
                                                             <div className="relative">
                                                                 <select
                                                                     value={isCustomModel ? 'custom' : aiForm.geminiModel}
@@ -1636,10 +1636,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                                     }}
                                                                     className="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-5 py-4 text-sm font-bold outline-none focus:ring-2 focus:ring-brand-400 text-slate-900 dark:text-white appearance-none"
                                                                 >
-                                                                    <option value="gemini-flash-latest">Gemini Flash Latest (Rekommenderas)</option>
-                                                                    <option value="gemini-2.0-flash-001">Gemini 2.0 Flash (Stabil)</option>
-                                                                    <option value="gemini-2.5-flash">Gemini 2.5 Flash (Nyhet)</option>
-                                                                    <option value="custom">Annan modell (Ange ID)...</option>
+                                                                    <option value="gemini-flash-latest">{t("gemini_flash_recommended", "Gemini Flash Latest (Rekommenderas)")}</option>
+                                                                    <option value="gemini-2.0-flash-001">{t("gemini_2_0_flash_stable", "Gemini 2.0 Flash (Stabil)")}</option>
+                                                                    <option value="gemini-2.5-flash">{t("gemini_2_5_flash_new", "Gemini 2.5 Flash (Nyhet)")}</option>
+                                                                    <option value="custom">{t("other_model_id", "Annan modell (Ange ID)...")}</option>
                                                                 </select>
                                                                 <Database className="absolute right-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
                                                             </div>
@@ -1673,22 +1673,22 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                                             <Wand2 className="w-6 h-6" />
                                                         </div>
                                                         <div className="flex-1">
-                                                            <h3 className="text-xl font-black text-slate-900 dark:text-white">AI Instruktioner</h3>
-                                                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Finslipa hur Savå och Agneta beter sig</p>
+                                                            <h3 className="text-xl font-black text-slate-900 dark:text-white">{t("ai_instructions_title", "AI Instruktioner")}</h3>
+                                                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{t("ai_instructions_desc", "Finslipa hur Savå och Agneta beter sig")}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="grid grid-cols-1 gap-8">
                                                         {[
-                                                            { id: 'agnetaSystemPrompt', label: 'Agneta: System / Hjärna (Global)', icon: Brain, placeholder: 'Lägg till globala systeminstruktioner...', desc: 'Definierar Agnetas grundläggande personlighet.' },
-                                                            { id: 'agnetaProfilePrompt', label: 'Agneta: Profil / Sammanfattning', icon: Wand2, placeholder: 'Instruktioner för profil-sektionen...' },
-                                                            { id: 'agnetaExperiencePrompt', label: 'Agneta: Arbetslivserfarenhet', icon: Briefcase, placeholder: 'Instruktioner för erfarenheter...' },
-                                                            { id: 'agnetaEducationPrompt', label: 'Agneta: Utbildning', icon: GraduationCap, placeholder: 'Instruktioner för utbildning...' },
-                                                            { id: 'agnetaCoverLetterPrompt', label: 'Agneta: Personligt Brev', icon: FileText, placeholder: 'Instruktioner för personligt brev...' },
-                                                            { id: 'agnetaGreetingStandard', label: 'Agneta: Hälsning (Standard)', icon: MessageSquare, placeholder: 'Hej! Vad kan jag hjälpa dig med idag?' },
-                                                            { id: 'agnetaGreetingJob', label: 'Agneta: Hälsning (Jobbansökan)', icon: Briefcase, placeholder: 'Jag ser att du vill söka jobbet som...' },
-                                                            { id: 'savaMatchingPrompt', label: 'Savå: Matchningsmotor', icon: Search, placeholder: 'Hur Savå matchar kandidater...' },
-                                                            { id: 'importMappingPrompt', label: 'Import: CV-Tolkning', icon: Database, placeholder: 'Hur AI ska tolka CV-råtext...' }
+                                                            { id: 'agnetaSystemPrompt', label: t('agneta_system_brain', 'Agneta: System / Hjärna (Global)'), icon: Brain, placeholder: t('agneta_system_brain_placeholder', 'Lägg till globala systeminstruktioner...'), desc: t('agneta_system_brain_desc', 'Definierar Agnetas grundläggande personlighet.') },
+                                                            { id: 'agnetaProfilePrompt', label: t('agneta_profile_summary', 'Agneta: Profil / Sammanfattning'), icon: Wand2, placeholder: t('agneta_profile_summary_placeholder', 'Instruktioner för profil-sektionen...') },
+                                                            { id: 'agnetaExperiencePrompt', label: t('agneta_experience', 'Agneta: Arbetslivserfarenhet'), icon: Briefcase, placeholder: t('agneta_experience_placeholder', 'Instruktioner för erfarenheter...') },
+                                                            { id: 'agnetaEducationPrompt', label: t('agneta_education', 'Agneta: Utbildning'), icon: GraduationCap, placeholder: t('agneta_education_placeholder', 'Instruktioner för utbildning...') },
+                                                            { id: 'agnetaCoverLetterPrompt', label: t('agneta_cover_letter', 'Agneta: Personligt Brev'), icon: FileText, placeholder: t('agneta_cover_letter_placeholder', 'Instruktioner för personligt brev...') },
+                                                            { id: 'agnetaGreetingStandard', label: t('agneta_greeting_standard', 'Agneta: Hälsning (Standard)'), icon: MessageSquare, placeholder: t('agneta_greeting_standard_placeholder', 'Hej! Vad kan jag hjälpa dig med idag?') },
+                                                            { id: 'agnetaGreetingJob', label: t('agneta_greeting_job', 'Agneta: Hälsning (Jobbansökan)'), icon: Briefcase, placeholder: t('agneta_greeting_job_placeholder', 'Jag ser att du vill söka jobbet som...') },
+                                                            { id: 'savaMatchingPrompt', label: t('sava_matching_engine', 'Savå: Matchningsmotor'), icon: Search, placeholder: t('sava_matching_engine_placeholder', 'Hur Savå matchar kandidater...') },
+                                                            { id: 'importMappingPrompt', label: t('import_cv_parsing', 'Import: CV-Tolkning'), icon: Database, placeholder: t('import_cv_parsing_placeholder', 'Hur AI ska tolka CV-råtext...') }
                                                         ].map(item => (
                                                             <div key={item.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 rounded-[2.5rem] space-y-4 shadow-sm relative group overflow-hidden">
                                                                 <div className="flex items-center justify-between gap-4">
