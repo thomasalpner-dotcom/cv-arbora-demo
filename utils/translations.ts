@@ -14,6 +14,15 @@ export const LANGUAGES: { code: Language; name: string; flag: string }[] = [
 
 export const translations: Record<Language, Record<string, string>> = {
   sv: {
+    "manual_settings": "Manuella inställningar",
+    "preview": "Förhandsgranskning",
+    "test_fill_data": "Testfyll med exempeldata",
+    "template_name": "Namn på mall",
+    "layout": "Layout",
+    "ask_agneta_design": "Fråga Agneta om design",
+    "save_template": "Spara Mall",
+    "live_preview": "Live Preview",
+    "test_filled": "Testfylld",
     "gemini_ai_configuration": "Gemini AI Konfiguration",
     "manage_api_model": "Hantera API-nyckel och AI-modell",
     "test": "Testa",
@@ -564,6 +573,15 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Skriv ditt meddelande..."
   },
   en: {
+    "manual_settings": "Manual settings",
+    "preview": "Preview",
+    "test_fill_data": "Test fill with example data",
+    "template_name": "Template name",
+    "layout": "Layout",
+    "ask_agneta_design": "Ask Agneta about design",
+    "save_template": "Save Template",
+    "live_preview": "Live Preview",
+    "test_filled": "Test filled",
     "gemini_ai_configuration": "Gemini AI Configuration",
     "manage_api_model": "Manage API key and AI model",
     "test": "Test",
@@ -1114,6 +1132,15 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Write your message..."
   },
   de: {
+    "manual_settings": "Manuelle Einstellungen",
+    "preview": "Vorschau",
+    "test_fill_data": "Mit Beispieldaten testen",
+    "template_name": "Vorlagenname",
+    "layout": "Layout",
+    "ask_agneta_design": "Agneta nach Design fragen",
+    "save_template": "Vorlage speichern",
+    "live_preview": "Live-Vorschau",
+    "test_filled": "Test gefüllt",
     "gemini_ai_configuration": "Gemini KI-Konfiguration",
     "manage_api_model": "API-Schlüssel und KI-Modell verwalten",
     "test": "Testen",
@@ -1662,6 +1689,15 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Schreiben Sie Ihre Nachricht..."
   },
   fi: {
+    "manual_settings": "Manuaaliset asetukset",
+    "preview": "Esikatselu",
+    "test_fill_data": "Testitäytä esimerkkidatalla",
+    "template_name": "Mallin nimi",
+    "layout": "Asettelu",
+    "ask_agneta_design": "Kysy Agnetalta suunnittelusta",
+    "save_template": "Tallenna malli",
+    "live_preview": "Live-esikatselu",
+    "test_filled": "Testitäytetty",
     "gemini_ai_configuration": "Gemini-tekoälyn konfigurointi",
     "manage_api_model": "Hallitse API-avainta ja tekoälymallia",
     "test": "Testaa",
@@ -2210,6 +2246,15 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Kirjoita viestisi..."
   },
   da: {
+    "manual_settings": "Manuelle indstillinger",
+    "preview": "Forhåndsvisning",
+    "test_fill_data": "Testudfyld med eksempeldata",
+    "template_name": "Skabelonnavn",
+    "layout": "Layout",
+    "ask_agneta_design": "Spørg Agneta om design",
+    "save_template": "Gem skabelon",
+    "live_preview": "Live Forhåndsvisning",
+    "test_filled": "Test udfyldt",
     "gemini_ai_configuration": "Gemini AI-konfiguration",
     "manage_api_model": "Administrer API-nøgle og AI-model",
     "test": "Test",
@@ -2758,6 +2803,15 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Skriv din besked..."
   },
   no: {
+    "manual_settings": "Manuelle innstillinger",
+    "preview": "Forhåndsvisning",
+    "test_fill_data": "Testfyll med eksempeldata",
+    "template_name": "Malnavn",
+    "layout": "Oppsett",
+    "ask_agneta_design": "Spør Agneta om design",
+    "save_template": "Lagre mal",
+    "live_preview": "Live Forhåndsvisning",
+    "test_filled": "Test fylt",
     "gemini_ai_configuration": "Gemini AI-konfigurasjon",
     "manage_api_model": "Administrer API-nøkkel og AI-modell",
     "test": "Test",
@@ -3308,6 +3362,15 @@ export const translations: Record<Language, Record<string, string>> = {
     write_your_message: "Skriv meldingen din..."
   },
   fr: {
+    "manual_settings": "Paramètres manuels",
+    "preview": "Aperçu",
+    "test_fill_data": "Remplir avec des données d'exemple",
+    "template_name": "Nom du modèle",
+    "layout": "Mise en page",
+    "ask_agneta_design": "Demander à Agneta pour le design",
+    "save_template": "Enregistrer le modèle",
+    "live_preview": "Aperçu en direct",
+    "test_filled": "Test rempli",
     "gemini_ai_configuration": "Configuration de l'IA Gemini",
     "manage_api_model": "Gérer la clé API et le modèle d'IA",
     "test": "Tester",

@@ -791,7 +791,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                 </>
                             )}
                             <div className="pt-4 flex gap-4">
-                                <button type="button" onClick={() => setIsAddModalOpen(false)} className="flex-1 py-4 bg-slate-100 dark:bg-slate-800 text-slate-400 font-black uppercase tracking-widest text-[10px] rounded-2xl">Avbryt</button>
+                                <button type="button" onClick={() => setIsAddModalOpen(false)} className="flex-1 py-4 bg-slate-100 dark:bg-slate-800 text-slate-400 font-black uppercase tracking-widest text-[10px] rounded-2xl">{t("cancel", "Avbryt")}</button>
                                 <button type="submit" disabled={isSaving} className="flex-1 py-4 bg-brand-400 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl shadow-xl shadow-brand-400/20">
                                     {isSaving ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : (activeTab === 'whitelist' ? 'Skapa Gästkonto' : 'Spara Coach')}
                                 </button>
@@ -887,7 +887,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                             </div>
 
                             <div className="pt-4 flex gap-4">
-                                <button type="button" onClick={() => setIsStockModalOpen(false)} className="flex-1 py-4 bg-slate-100 dark:bg-slate-800 text-slate-400 font-black uppercase tracking-widest text-[10px] rounded-2xl">Avbryt</button>
+                                <button type="button" onClick={() => setIsStockModalOpen(false)} className="flex-1 py-4 bg-slate-100 dark:bg-slate-800 text-slate-400 font-black uppercase tracking-widest text-[10px] rounded-2xl">{t("cancel", "Avbryt")}</button>
                                 <button type="submit" disabled={isSaving || !newStockImage.url} className="flex-1 py-4 bg-brand-400 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl shadow-xl shadow-brand-400/20 disabled:opacity-50">
                                     {isSaving ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : 'Spara i Bibliotek'}
                                 </button>
@@ -911,7 +911,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                             ) : (
                                 <div className="flex flex-col h-full">
                                     <div className="p-10 pb-4 flex justify-between items-center shrink-0 border-b border-slate-100 dark:border-slate-800/50">
-                                        <div><h2 className="text-2xl font-black text-slate-900 dark:text-white">Mall-Labbet</h2><p className="text-[10px] text-slate-500 font-black uppercase tracking-widest mt-1">Manuella inställningar</p></div>
+                                        <div><h2 className="text-2xl font-black text-slate-900 dark:text-white">Mall-Labbet</h2><p className="text-[10px] text-slate-500 font-black uppercase tracking-widest mt-1">{t("manual_settings", "Manuella inställningar")}</p></div>
                                         <button onClick={() => setEditingTemplate(null)} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl text-slate-500"><X className="w-6 h-6" /></button>
                                     </div>
 
@@ -920,18 +920,18 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                             <div className="flex items-center gap-3">
                                                 <Database className={`w-5 h-5 transition-colors ${showTestData ? 'text-brand-400' : 'text-slate-400'}`} />
                                                 <div>
-                                                    <span className="text-[10px] font-black text-brand-400 uppercase tracking-widest block">Förhandsgranskning</span>
-                                                    <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Testfyll med exempeldata</span>
+                                                    <span className="text-[10px] font-black text-brand-400 uppercase tracking-widest block">{t("preview", "Förhandsgranskning")}</span>
+                                                    <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">{t("test_fill_data", "Testfyll med exempeldata")}</span>
                                                 </div>
                                             </div>
                                             <button onClick={() => setShowTestData(!showTestData)} className={`w-12 h-6 rounded-full transition-all relative ${showTestData ? 'bg-brand-400' : 'bg-slate-300 dark:bg-slate-700'}`}><div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${showTestData ? 'left-7' : 'left-1'}`} /></button>
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Namn på mall</label>
+                                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">{t("template_name", "Namn på mall")}</label>
                                             <input value={editingTemplate.name} onChange={e => setEditingTemplate({ ...editingTemplate, name: e.target.value })} className="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-5 py-4 text-sm font-bold outline-none focus:ring-2 focus:ring-brand-400 text-slate-900 dark:text-white" />
                                         </div>
                                         <div className="space-y-4">
-                                            <h3 className="text-[10px] font-black text-brand-400 uppercase tracking-[0.2em] border-b border-slate-100 dark:border-slate-800 pb-2">Layout</h3>
+                                            <h3 className="text-[10px] font-black text-brand-400 uppercase tracking-[0.2em] border-b border-slate-100 dark:border-slate-800 pb-2">{t("layout", "Layout")}</h3>
                                             <div className="grid grid-cols-2 gap-4 text-[10px] font-black uppercase tracking-widest">
                                                 {['sidebar-left', 'sidebar-right', 'header-only', 'split-equal'].map(l => (
                                                     <button key={l} onClick={() => setEditingTemplate({ ...editingTemplate, config: { ...editingTemplate.config, layout: l as any } })} className={`p-4 rounded-2xl border-2 transition-all ${editingTemplate.config.layout === l ? 'border-brand-400 bg-brand-400/5' : 'border-slate-100 dark:border-slate-800 hover:border-slate-200 dark:hover:border-slate-700'}`}>{l.replace('-', ' ')}</button>
@@ -941,10 +941,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                                     </div>
 
                                     <div className="p-10 pt-4 flex flex-col gap-3 shrink-0 border-t border-slate-100 dark:border-slate-800/50">
-                                        <button onClick={() => setShowAgneta(true)} className="w-full py-4 bg-brand-400 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl shadow-xl shadow-brand-400/20 flex items-center justify-center gap-2 hover:bg-brand-500 transition-all"><Sparkles className="w-4 h-4" /> Fråga Agneta om design</button>
+                                        <button onClick={() => setShowAgneta(true)} className="w-full py-4 bg-brand-400 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl shadow-xl shadow-brand-400/20 flex items-center justify-center gap-2 hover:bg-brand-500 transition-all"><Sparkles className="w-4 h-4" /> {t("ask_agneta_design", "Fråga Agneta om design")}</button>
                                         <div className="flex gap-4">
-                                            <button onClick={() => setEditingTemplate(null)} className="flex-1 py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 font-black uppercase tracking-widest text-[10px] rounded-2xl">Avbryt</button>
-                                            <button onClick={handleSaveTemplate} className="flex-1 py-4 bg-emerald-600 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl shadow-xl shadow-emerald-500/20 flex items-center justify-center gap-2"><Save className="w-4 h-4" /> Spara Mall</button>
+                                            <button onClick={() => setEditingTemplate(null)} className="flex-1 py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 font-black uppercase tracking-widest text-[10px] rounded-2xl">{t("cancel", "Avbryt")}</button>
+                                            <button onClick={handleSaveTemplate} className="flex-1 py-4 bg-emerald-600 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl shadow-xl shadow-emerald-500/20 flex items-center justify-center gap-2"><Save className="w-4 h-4" /> {t("save_template", "Spara Mall")}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -954,7 +954,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ users, resumes, particip
                         <div className="flex-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[3rem] flex items-center justify-center p-12 relative overflow-hidden">
                             <div className="absolute top-10 left-10 flex items-center gap-3">
                                 <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_10px_#10b981]"></div>
-                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Live Preview {showTestData && " - Testfylld"}</span>
+                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{t("live_preview", "Live Preview")} {showTestData && " - " + t("test_filled", "Testfylld")}</span>
                             </div>
                             <div className="scale-[0.55] origin-center shadow-2xl bg-white">
                                 <MasterTemplate
