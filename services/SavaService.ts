@@ -2,7 +2,7 @@ import { GoogleGenAI } from "@google/genai";
 import { ResumeData } from "../types";
 
 export class SavaService {
-  static async searchCandidates(query: string, allResumes: ResumeData[], apiKey: string, modelId: string = 'gemini-1.5-flash', customPrompt?: string, savaName: string = 'Savå') {
+  static async searchCandidates(query: string, allResumes: ResumeData[], apiKey: string, modelId: string = 'gemini-1.5-flash', customPrompt?: string, savaName: string = 'Savå', language: string = 'sv') {
     console.log("Savå Service V2 (Cache Bypass) active");
     if (!apiKey) throw new Error("API-nyckel saknas för matchning.");
 
@@ -43,7 +43,7 @@ export class SavaService {
                 {
                   "resumeId": "ID_HÄR",
                   "score": 95,
-                  "reason": "Kort motivering här..."
+                  "reason": "Kort motivering här... (MÅSTE VARA PÅ SPRÅKKOD: ${language})"
                 }
               ]
             }
@@ -58,8 +58,9 @@ export class SavaService {
             1. Analysera kandidaterna i listan nedan.
             2. Välj ut de 5-10 bästa matchningarna.
             3. Ge varje matchning en matchningspoäng (score) mellan 0 och 100.
-            4. Ge en kort motivering (reason) på svenska varför kandidaten matchar.
+            4. Ge en kort motivering (reason) varför kandidaten matchar.
             5. Returnera resultatet som en JSON-array under nyckeln "matches".
+            6. VIKTIGT: Du MÅSTE skriva motiveringarna på språkkoden "${language}" om inte användaren ber om något annat.
             
             KANDIDATER:
             ${JSON.stringify(simplifiedResumes)}
@@ -70,7 +71,7 @@ export class SavaService {
                 {
                   "resumeId": "ID_HÄR",
                   "score": 95,
-                  "reason": "Kort motivering här..."
+                  "reason": "Kort motivering här... (MÅSTE VARA PÅ SPRÅKKOD: ${language})"
                 }
               ]
             }

@@ -172,8 +172,8 @@ export const AgnetaChatSidekick: React.FC<Props> = ({ isOpen, onClose, context, 
 
                 KRAV PÅ SVAR (JSON):
                 { 
-                  "reply": "Kort kommentar om vad du gjort (på rätt språk)", 
-                  "htmlSuggestion": "Den genererade texten som HTML (på rätt språk)" 
+                  "reply": "Kort kommentar om vad du gjort (MÅSTE VARA PÅ SPRÅKKOD: ${currentLanguage})", 
+                  "htmlSuggestion": "Den genererade texten som HTML (MÅSTE VARA PÅ SPRÅKKOD: ${currentLanguage})" 
                 }
             ` : `
                 IDENTITET: Du är ${systemSettings.agnetaName || 'Agneta'}, en CV-coach.
@@ -194,11 +194,12 @@ export const AgnetaChatSidekick: React.FC<Props> = ({ isOpen, onClose, context, 
                 1. Om det är en jobbansökan, skriv ett personligt och professionellt brev som matchar CV-datan mot jobbet.
                 2. Använd <b>-taggar för viktiga ord.
                 3. Håll en engagerande och proffsig ton.
+                4. VIKTIGT: Du MÅSTE svara på språkkoden "${currentLanguage}" om inte användaren uttryckligen ber om ett annat språk.
                 
                 KRAV PÅ SVAR (JSON):
                 { 
-                  "reply": "Kort kommentar om vad du gjort (på rätt språk)", 
-                  "htmlSuggestion": "Den genererade texten som HTML (på rätt språk)" 
+                  "reply": "Kort kommentar om vad du gjort (på rätt språk: ${currentLanguage})", 
+                  "htmlSuggestion": "Den genererade texten som HTML (på rätt språk: ${currentLanguage})" 
                 }
             `;
 

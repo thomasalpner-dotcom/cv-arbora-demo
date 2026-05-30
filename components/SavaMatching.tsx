@@ -59,7 +59,7 @@ export const SavaMatching: React.FC<Props> = ({
 
         setIsSearching(true);
         try {
-            const result = await SavaService.searchCandidates(query, allResumes, apiKey, geminiModel, matchingPrompt, savaName);
+            const result = await SavaService.searchCandidates(query, allResumes, apiKey, geminiModel, matchingPrompt, savaName, currentLanguage);
 
             if (result && result.matches) {
                 const enrichedResults = result.matches
