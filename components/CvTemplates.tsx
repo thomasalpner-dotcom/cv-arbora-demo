@@ -541,6 +541,7 @@ export const MasterTemplate: React.FC<TemplateProps & {
         borderColor: '#e2e8f0'
     };
 
+    const { t } = useTranslation();
     const { left, right } = getSectionGroups(data);
     const p = data.personal;
 
@@ -641,7 +642,7 @@ export const MasterTemplate: React.FC<TemplateProps & {
                         <PhotoRenderer position="sidebar-top" />
                         <div className="flex flex-col gap-8 flex-1 relative z-10 text-white font-bold">
                             <section>
-                                <h3 className="text-[0.8em] font-black uppercase tracking-widest mb-4 text-white">Kontakt</h3>
+                                <h3 className="text-[0.8em] font-black uppercase tracking-widest mb-4 text-white">{t('contact_info')}</h3>
                                 <div className="space-y-3 text-[0.85em] font-medium text-white/90">
                                     {p.email && <div className="flex items-center gap-3"><Mail className="w-4 h-4" />{p.email}</div>}
                                     {p.phone && <div className="flex items-center gap-3"><Phone className="w-4 h-4" />{p.phone}</div>}
@@ -692,6 +693,7 @@ export const MasterTemplate: React.FC<TemplateProps & {
 };
 
 export const ClassicSidebar: React.FC<TemplateProps> = ({ data, fontClass, containerStyle, design, isBrev, brevContent }) => {
+    const { t } = useTranslation();
     const { left, right } = getSectionGroups(data);
     const p = data.personal;
     const layoutStyle: React.CSSProperties = {
@@ -706,7 +708,7 @@ export const ClassicSidebar: React.FC<TemplateProps> = ({ data, fontClass, conta
                 <div className="w-[65mm] text-white p-4 flex flex-col gap-4 shrink-0 relative z-10" style={{ backgroundColor: design.accentColor }}>
                     <div className="relative z-10 flex flex-col gap-4">
                         {p.photoUrl && <div className="w-[65%] mx-auto aspect-square bg-white rounded-xl overflow-hidden mb-1 shadow-2xl border-3 border-white/10 shrink-0"><img src={p.photoUrl} className="w-full h-full object-cover" /></div>}
-                        <section className="shrink-0"><h3 className="text-[0.95em] border-b border-white/20 pb-1.5 mb-3 font-black uppercase tracking-[0.2em]">Kontakt</h3>
+                        <section className="shrink-0"><h3 className="text-[0.95em] border-b border-white/20 pb-1.5 mb-3 font-black uppercase tracking-[0.2em]">{t('contact_info')}</h3>
                             <div className="space-y-2.5 text-[0.82em] font-medium opacity-90">
                                 {p.email && <div className="flex items-start gap-3"><Mail className="w-4 h-4 mt-0.5 shrink-0" /><span className="break-all">{p.email}</span></div>}
                                 {p.phone && <div className="flex items-start gap-3"><Phone className="w-4 h-4 mt-0.5 shrink-0" />{p.phone}</div>}
@@ -736,6 +738,7 @@ export const ClassicSidebar: React.FC<TemplateProps> = ({ data, fontClass, conta
 };
 
 export const ModernHeader: React.FC<TemplateProps> = ({ data, fontClass, containerStyle, design, isBrev, brevContent }) => {
+    const { t } = useTranslation();
     const { left, right } = getSectionGroups(data);
     const p = data.personal;
     return (
@@ -779,6 +782,7 @@ export const Minimalist: React.FC<TemplateProps> = ({ data, fontClass, container
 };
 
 export const CreativeProfile: React.FC<TemplateProps> = ({ data, fontClass, containerStyle, design, isBrev, brevContent }) => {
+    const { t } = useTranslation();
     const { left, right } = getSectionGroups(data);
     const p = data.personal;
 
@@ -791,7 +795,7 @@ export const CreativeProfile: React.FC<TemplateProps> = ({ data, fontClass, cont
                 <div className="w-[85mm] bg-gray-50 flex flex-col p-6 border-r border-gray-100 shrink-0">
                     {p.photoUrl && <div className="w-48 h-48 rounded-[2.5rem] overflow-hidden shadow-2xl mb-8 mx-auto shrink-0"><img src={p.photoUrl} className="w-full h-full object-cover" /></div>}
                     <div className="space-y-8">
-                        <section><h3 className="text-[1.1em] font-black uppercase tracking-[0.2em] mb-6" style={{ color: design.accentColor }}>Kontakt</h3><div className="space-y-3.5 text-[0.85em] font-bold text-gray-600">{p.email && <div className="flex items-center gap-3"><div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0"><Mail className="w-4.5 h-4.5" /></div>{p.email}</div>}{p.phone && <div className="flex items-center gap-3"><div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0"><Phone className="w-4.5 h-4.5" /></div>{p.phone}</div>}{p.address && <div className="flex items-center gap-3"><div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0"><MapPin className="w-4.5 h-4.5" /></div>{p.address}</div>}{(p.zipCode || p.city) && <div className="flex items-center gap-3"><div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0"><MapPin className="w-4.5 h-4.5" /></div>{[p.zipCode, p.city].filter(Boolean).join(' ')}</div>}{p.linkedin && <div className="flex items-center gap-3"><div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0"><Linkedin className="w-4.5 h-4.5" /></div>{p.linkedin}</div>}{p.website && <div className="flex items-center gap-3"><div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0"><Globe className="w-4.5 h-4.5" /></div>{p.website}</div>}{p.driversLicense && <div className="flex items-center gap-3"><div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0"><Car className="w-4.5 h-4.5" /></div>{p.driversLicense}</div>}</div></section>
+                        <section><h3 className="text-[1.1em] font-black uppercase tracking-[0.2em] mb-6" style={{ color: design.accentColor }}>{t('contact_info')}</h3><div className="space-y-3.5 text-[0.85em] font-bold text-gray-600">{p.email && <div className="flex items-center gap-3"><div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0"><Mail className="w-4.5 h-4.5" /></div>{p.email}</div>}{p.phone && <div className="flex items-center gap-3"><div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0"><Phone className="w-4.5 h-4.5" /></div>{p.phone}</div>}{p.address && <div className="flex items-center gap-3"><div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0"><MapPin className="w-4.5 h-4.5" /></div>{p.address}</div>}{(p.zipCode || p.city) && <div className="flex items-center gap-3"><div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0"><MapPin className="w-4.5 h-4.5" /></div>{[p.zipCode, p.city].filter(Boolean).join(' ')}</div>}{p.linkedin && <div className="flex items-center gap-3"><div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0"><Linkedin className="w-4.5 h-4.5" /></div>{p.linkedin}</div>}{p.website && <div className="flex items-center gap-3"><div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0"><Globe className="w-4.5 h-4.5" /></div>{p.website}</div>}{p.driversLicense && <div className="flex items-center gap-3"><div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0"><Car className="w-4.5 h-4.5" /></div>{p.driversLicense}</div>}</div></section>
                         {left.map(sid => <SectionRenderer key={sid} data={data} sectionId={sid} headerClass="text-[1.1em] font-black uppercase tracking-[0.2em] mb-6" headerStyle={{ color: design.accentColor }} />)}
                     </div>
                 </div>
@@ -863,6 +867,7 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ data, fontClass, conta
 };
 
 export const AventusClassic: React.FC<TemplateProps> = ({ data, fontClass, containerStyle, design, isBrev, brevContent }) => {
+    const { t } = useTranslation();
     const { left, right } = getSectionGroups(data);
     const p = data.personal;
 
@@ -894,7 +899,7 @@ export const AventusClassic: React.FC<TemplateProps> = ({ data, fontClass, conta
                     )}
 
                     <section>
-                        <h3 className="text-[1.1em] font-black uppercase tracking-[0.2em] mb-4 text-slate-800" style={{ color: design.accentColor }}>Personuppgifter</h3>
+                        <h3 className="text-[1.1em] font-black uppercase tracking-[0.2em] mb-4 text-slate-800" style={{ color: design.accentColor }}>{t('personal_info')}</h3>
                         <div className="space-y-4 text-[0.85em]">
                             {p.firstName && (
                                 <div>
@@ -965,6 +970,7 @@ export const AventusClassic: React.FC<TemplateProps> = ({ data, fontClass, conta
 };
 
 export const ProfessionalWave: React.FC<TemplateProps> = ({ data, fontClass, containerStyle, design, isBrev, brevContent }) => {
+    const { t } = useTranslation();
     const { left, right } = getSectionGroups(data);
     const p = data.personal;
 
@@ -1015,7 +1021,7 @@ export const ProfessionalWave: React.FC<TemplateProps> = ({ data, fontClass, con
                     {/* Sidebar */}
                     <div className="col-span-4 flex flex-col gap-10">
                         <section>
-                            <h3 className="text-[0.9em] font-black uppercase tracking-widest mb-6 pb-2 border-b-2" style={{ borderColor: `${design.accentColor}20`, color: design.accentColor }}>Kontakt</h3>
+                            <h3 className="text-[0.9em] font-black uppercase tracking-widest mb-6 pb-2 border-b-2" style={{ borderColor: `${design.accentColor}20`, color: design.accentColor }}>{t('contact_info')}</h3>
                             <div className="space-y-4 text-[0.85em] font-bold text-slate-600">
                                 {p.email && <div className="flex items-center gap-3"><Mail className="w-4 h-4 opacity-40" />{p.email}</div>}
                                 {p.phone && <div className="flex items-center gap-3"><Phone className="w-4 h-4 opacity-40" />{p.phone}</div>}
@@ -1214,7 +1220,7 @@ export const StandardCoverLetter: React.FC<TemplateProps> = ({ data, containerSt
 
                     {/* Sign-off Space */}
                     <div className="mt-12 text-[0.95em] font-medium text-black">
-                        <p className="mb-8">{(coverLetter as any).signOff || 'Vänliga hälsningar,'}</p>
+                        <p className="mb-8">{(coverLetter as any).signOff || t('sign_off_default')}</p>
                         <p className="font-bold">{p.firstName} {p.lastName}</p>
                     </div>
                 </div>

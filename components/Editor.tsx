@@ -581,15 +581,15 @@ export const Editor: React.FC<Props> = ({ resume, onSave, onBack, isDarkMode, to
                         <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('employer_company')}</label><input value={item.company} onChange={e => updateItem({ company: e.target.value })} placeholder="Ex: Företaget AB" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm font-bold" /></div>
                     </div>
                     <div className="grid grid-cols-3 gap-4">
-                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Ort</label><input value={item.location} onChange={e => updateItem({ location: e.target.value })} placeholder="Ex: Stockholm" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
-                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Startdatum</label><input value={item.startDate} onChange={e => updateItem({ startDate: e.target.value })} placeholder="Ex: Mars 2020" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
-                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Slutdatum</label><input value={item.endDate} disabled={item.current} onChange={e => updateItem({ endDate: e.target.value })} placeholder={item.current ? "Nu" : "Ex: Jan 2023"} className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm disabled:opacity-50" /></div>
+                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('city', 'Ort')}</label><input value={item.location} onChange={e => updateItem({ location: e.target.value })} placeholder="Ex: Stockholm" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
+                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('start_date', 'Startdatum')}</label><input value={item.startDate} onChange={e => updateItem({ startDate: e.target.value })} placeholder="Ex: Mars 2020" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
+                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('end_date', 'Slutdatum')}</label><input value={item.endDate} disabled={item.current} onChange={e => updateItem({ endDate: e.target.value })} placeholder={item.current ? "Nu" : "Ex: Jan 2023"} className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm disabled:opacity-50" /></div>
                     </div>
                     <label className="flex items-center gap-2 cursor-pointer w-fit">
                         <input type="checkbox" checked={item.current} onChange={e => updateItem({ current: e.target.checked })} className="w-4 h-4 rounded border-gray-300 text-brand-400 focus:ring-brand-400" />
                         <span className="text-[10px] font-bold text-gray-500 uppercase tracking-tight">{t('currently_work_here_label')}</span>
                     </label>
-                    <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Beskrivning</label><RichTextEditor value={item.description} onChange={v => updateItem({ description: v })} onOpenAgneta={(html, ctx) => handleOpenAgneta(sectionId, item.id, html, ctx)} /></div>
+                    <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('description', 'Beskrivning')}</label><RichTextEditor value={item.description} onChange={v => updateItem({ description: v })} onOpenAgneta={(html, ctx) => handleOpenAgneta(sectionId, item.id, html, ctx)} /></div>
                 </div>
             );
         }
@@ -605,7 +605,7 @@ export const Editor: React.FC<Props> = ({ resume, onSave, onBack, isDarkMode, to
                         <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('school_university')}</label><input value={item.school} onChange={e => updateItem({ school: e.target.value })} placeholder="Ex: Stockholms Universitet" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm font-bold" /></div>
                     </div>
                     <div className="grid grid-cols-3 gap-4">
-                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Ort</label><input value={item.location} onChange={e => updateItem({ location: e.target.value })} placeholder="Ex: Stockholm" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
+                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('city', 'Ort')}</label><input value={item.location} onChange={e => updateItem({ location: e.target.value })} placeholder="Ex: Stockholm" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
                         <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('start_year')}</label><input value={item.startDate} onChange={e => updateItem({ startDate: e.target.value })} placeholder="Ex: 2018" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
                         <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('end_year_expected')}</label><input value={item.endDate} onChange={e => updateItem({ endDate: e.target.value })} placeholder="Ex: 2021" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
                     </div>
@@ -625,10 +625,10 @@ export const Editor: React.FC<Props> = ({ resume, onSave, onBack, isDarkMode, to
                         <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Utfärdare / Organisation</label><input value={item.issuer} onChange={e => updateItem({ issuer: e.target.value })} placeholder="Ex: Google" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Startdatum</label><input value={item.startDate} onChange={e => updateItem({ startDate: e.target.value })} placeholder="Ex: 2022" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
-                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Slutdatum</label><input value={item.endDate} onChange={e => updateItem({ endDate: e.target.value })} placeholder="Ex: 2023" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
+                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('start_date', 'Startdatum')}</label><input value={item.startDate} onChange={e => updateItem({ startDate: e.target.value })} placeholder="Ex: 2022" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
+                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('end_date', 'Slutdatum')}</label><input value={item.endDate} onChange={e => updateItem({ endDate: e.target.value })} placeholder="Ex: 2023" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
                     </div>
-                    <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Beskrivning</label><RichTextEditor value={item.description} onChange={v => updateItem({ description: v })} onOpenAgneta={(html, ctx) => handleOpenAgneta(sectionId, item.id, html, ctx)} /></div>
+                    <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('description', 'Beskrivning')}</label><RichTextEditor value={item.description} onChange={v => updateItem({ description: v })} onOpenAgneta={(html, ctx) => handleOpenAgneta(sectionId, item.id, html, ctx)} /></div>
                 </div>
             );
         }
@@ -638,11 +638,11 @@ export const Editor: React.FC<Props> = ({ resume, onSave, onBack, isDarkMode, to
                 <div className="flex flex-col gap-4 bg-gray-50 dark:bg-gray-900 p-6 rounded-3xl group border border-gray-100 dark:border-gray-800 relative">
                     <button onClick={removeItem} className="absolute top-4 right-4 p-2 text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"><Trash2 className="w-4 h-4" /></button>
                     <div className="space-y-1">
-                        <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Språk</label>
+                        <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">{t('language', 'Språk')}</label>
                         <input value={item.name} onChange={e => updateItem({ name: e.target.value })} placeholder="Ex: Svenska" className="w-full bg-white dark:bg-gray-800 p-3 rounded-xl border-none text-sm font-bold focus:ring-2 focus:ring-brand-400 outline-none shadow-sm" />
                     </div>
                     <div className="space-y-1">
-                        <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Nivå (1-5)</label>
+                        <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">{t('level_1_5', 'Nivå (1-5)')}</label>
                         <div className="flex gap-1.5 p-3 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
                             {[1, 2, 3, 4, 5].map(lv => (
                                 <button
@@ -665,7 +665,7 @@ export const Editor: React.FC<Props> = ({ resume, onSave, onBack, isDarkMode, to
                 <div className="flex items-center gap-4 bg-gray-50 dark:bg-gray-900 p-6 rounded-3xl group border border-gray-100 dark:border-gray-800 relative">
                     <button onClick={removeItem} className="absolute top-4 right-4 p-2 text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"><Trash2 className="w-4 h-4" /></button>
                     <div className="flex-1 space-y-1">
-                        <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Färdighet</label>
+                        <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">{t('skill', 'Färdighet')}</label>
                         <input
                             value={item.name}
                             onChange={e => updateItem({ name: e.target.value })}
@@ -674,7 +674,7 @@ export const Editor: React.FC<Props> = ({ resume, onSave, onBack, isDarkMode, to
                         />
                     </div>
                     <div className="space-y-1">
-                        <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Nivå (1-5)</label>
+                        <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">{t('level_1_5', 'Nivå (1-5)')}</label>
                         <div className="flex gap-1.5 p-3 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
                             {[1, 2, 3, 4, 5].map(lv => (
                                 <button key={lv} onClick={() => updateItem({ level: lv })} className={`w-7 h-7 rounded-lg transition-all font-black text-[10px] ${item.level >= lv ? 'bg-brand-400 text-white shadow-md shadow-brand-400/20' : 'bg-gray-100 dark:bg-gray-700 text-gray-300'}`}>{lv}</button>
@@ -690,12 +690,12 @@ export const Editor: React.FC<Props> = ({ resume, onSave, onBack, isDarkMode, to
                 <div className="p-6 bg-gray-50 dark:bg-gray-900 rounded-3xl space-y-4 relative group border border-gray-100 dark:border-gray-800">
                     <button onClick={removeItem} className="absolute top-4 right-4 p-2 text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"><Trash2 className="w-4 h-4" /></button>
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Namn på referens</label><input value={item.name} onChange={e => updateItem({ name: e.target.value })} placeholder="Ex: Erik Andersson" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm font-bold" /></div>
-                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Företag / Roll</label><input value={item.company} onChange={e => updateItem({ company: e.target.value })} placeholder="Ex: Tidigare chef på Bolaget AB" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
+                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('reference_name', 'Namn på referens')}</label><input value={item.name} onChange={e => updateItem({ name: e.target.value })} placeholder="Ex: Erik Andersson" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm font-bold" /></div>
+                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('reference_company', 'Företag / Roll')}</label><input value={item.company} onChange={e => updateItem({ company: e.target.value })} placeholder="Ex: Tidigare chef på Bolaget AB" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">E-post</label><input value={item.email} onChange={e => updateItem({ email: e.target.value })} placeholder="erik@exempel.se" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
-                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Telefon</label><input value={item.phone} onChange={e => updateItem({ phone: e.target.value })} placeholder="070-123 45 67" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
+                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('email', 'E-post')}</label><input value={item.email} onChange={e => updateItem({ email: e.target.value })} placeholder="erik@exempel.se" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
+                        <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('phone', 'Telefon')}</label><input value={item.phone} onChange={e => updateItem({ phone: e.target.value })} placeholder="070-123 45 67" className="w-full p-3 bg-white dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-brand-400 outline-none text-sm" /></div>
                     </div>
                 </div>
             );
@@ -911,7 +911,7 @@ export const Editor: React.FC<Props> = ({ resume, onSave, onBack, isDarkMode, to
                                             <div className="flex-1 space-y-4">
                                                 <div className="grid grid-cols-2 gap-4">
                                                     <div className="space-y-1">
-                                                        <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Förnamn</label>
+                                                        <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('first_name', 'Förnamn')}</label>
                                                         <input
                                                             value={data.personal.firstName}
                                                             onChange={e => updatePersonal('firstName', e.target.value)}
@@ -920,7 +920,7 @@ export const Editor: React.FC<Props> = ({ resume, onSave, onBack, isDarkMode, to
                                                         />
                                                     </div>
                                                     <div className="space-y-1">
-                                                        <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Efternamn</label>
+                                                        <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('last_name', 'Efternamn')}</label>
                                                         <input
                                                             value={data.personal.lastName}
                                                             onChange={e => updatePersonal('lastName', e.target.value)}
@@ -930,7 +930,7 @@ export const Editor: React.FC<Props> = ({ resume, onSave, onBack, isDarkMode, to
                                                     </div>
                                                 </div>
                                                 <div className="space-y-1">
-                                                    <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Yrkestitel eller Pitch</label>
+                                                    <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('job_title', 'Yrkestitel eller Pitch')}</label>
                                                     <input
                                                         value={data.personal.jobTitle}
                                                         onChange={e => updatePersonal('jobTitle', e.target.value)}
@@ -942,26 +942,26 @@ export const Editor: React.FC<Props> = ({ resume, onSave, onBack, isDarkMode, to
                                         </div>
 
                                         <div className="grid grid-cols-2 gap-4">
-                                            <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">E-post</label><input type="email" value={data.personal.email} onChange={e => updatePersonal('email', e.target.value)} className="w-full p-3 bg-gray-50 dark:bg-gray-950 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none font-medium" /></div>
-                                            <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Telefon</label><input value={data.personal.phone} onChange={e => updatePersonal('phone', e.target.value)} className="w-full p-3 bg-gray-50 dark:bg-gray-950 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none font-medium" /></div>
+                                            <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('email', 'E-post')}</label><input type="email" value={data.personal.email} onChange={e => updatePersonal('email', e.target.value)} className="w-full p-3 bg-gray-50 dark:bg-gray-950 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none font-medium" /></div>
+                                            <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('phone', 'Telefon')}</label><input value={data.personal.phone} onChange={e => updatePersonal('phone', e.target.value)} className="w-full p-3 bg-gray-50 dark:bg-gray-950 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none font-medium" /></div>
                                         </div>
 
                                         <div className="space-y-1">
-                                            <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Adress</label>
+                                            <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('address', 'Adress')}</label>
                                             <input value={data.personal.address || ''} onChange={e => updatePersonal('address', e.target.value)} className="w-full p-3 bg-gray-50 dark:bg-gray-950 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none font-medium" placeholder="Ex: Kungsgatan 1" />
                                         </div>
 
                                         <div className="grid grid-cols-2 gap-4">
-                                            <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Postnummer</label><input value={data.personal.zipCode || ''} onChange={e => updatePersonal('zipCode', e.target.value)} className="w-full p-3 bg-gray-50 dark:bg-gray-950 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none font-medium" placeholder="Ex: 111 22" /></div>
-                                            <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Ort</label><input value={data.personal.city} onChange={e => updatePersonal('city', e.target.value)} className="w-full p-3 bg-gray-50 dark:bg-gray-950 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none font-medium" placeholder="Ex: Stockholm" /></div>
+                                            <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('zip_code', 'Postnummer')}</label><input value={data.personal.zipCode || ''} onChange={e => updatePersonal('zipCode', e.target.value)} className="w-full p-3 bg-gray-50 dark:bg-gray-950 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none font-medium" placeholder="Ex: 111 22" /></div>
+                                            <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('city', 'Ort')}</label><input value={data.personal.city} onChange={e => updatePersonal('city', e.target.value)} className="w-full p-3 bg-gray-50 dark:bg-gray-950 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none font-medium" placeholder="Ex: Stockholm" /></div>
                                         </div>
 
                                         <div className="grid grid-cols-2 gap-4">
-                                            <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">LinkedIn</label><input value={data.personal.linkedin || ''} onChange={e => updatePersonal('linkedin', e.target.value)} className="w-full p-3 bg-gray-50 dark:bg-gray-950 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none font-medium" placeholder="linkedin.com/in/..." /></div>
-                                            <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Hemsida</label><input value={data.personal.website || ''} onChange={e => updatePersonal('website', e.target.value)} className="w-full p-3 bg-gray-50 dark:bg-gray-950 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none font-medium" placeholder="www.exempel.se" /></div>
+                                            <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('linkedin', 'LinkedIn')}</label><input value={data.personal.linkedin || ''} onChange={e => updatePersonal('linkedin', e.target.value)} className="w-full p-3 bg-gray-50 dark:bg-gray-950 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none font-medium" placeholder="linkedin.com/in/..." /></div>
+                                            <div className="space-y-1"><label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('website', 'Hemsida')}</label><input value={data.personal.website || ''} onChange={e => updatePersonal('website', e.target.value)} className="w-full p-3 bg-gray-50 dark:bg-gray-950 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none font-medium" placeholder="www.exempel.se" /></div>
                                         </div>
                                         <div className="space-y-1">
-                                            <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Körkort</label>
+                                            <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t('drivers_license', 'Körkort')}</label>
                                             <input value={data.personal.driversLicense || ''} onChange={e => updatePersonal('driversLicense', e.target.value)} className="w-full p-3 bg-gray-50 dark:bg-gray-950 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none font-medium" placeholder="Ex: B-körkort" />
                                         </div>
                                     </div>
@@ -1118,9 +1118,9 @@ export const Editor: React.FC<Props> = ({ resume, onSave, onBack, isDarkMode, to
                                         />
                                     </div>
                                     <div className="space-y-1">
-                                        <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Avslutningsfras</label>
+                                        <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">{t('sign_off', 'Avslutningsfras')}</label>
                                         <input
-                                            value={data.coverLetters?.find(l => l.id === docType.id)?.signOff || 'Vänliga hälsningar,'}
+                                            value={data.coverLetters?.find(l => l.id === docType.id)?.signOff || t('sign_off_default')}
                                             onChange={(e) => {
                                                 const updated = (data.coverLetters || []).map(l => l.id === docType.id ? { ...l, signOff: e.target.value } : l);
                                                 updateField('coverLetters', updated);
@@ -1168,7 +1168,7 @@ export const Editor: React.FC<Props> = ({ resume, onSave, onBack, isDarkMode, to
                                             </div>
                                         </div>
                                         <div className="space-y-1">
-                                            <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Ort</label>
+                                            <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">{t('city', 'Ort')}</label>
                                             <div className="relative">
                                                 <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300" />
                                                 <input

@@ -127,17 +127,44 @@ export const Dashboard: React.FC<Props> = ({
         const templateKey = type === 'simple' ? 'simple' : type === 'cv' ? 'withCV' : 'withCoverLetter';
         const template = systemSettings.emailTemplates?.[templateKey];
 
+        // Map template key to translation keys
+        const subjectKey = type === 'simple' ? 'email_simple_subject' : type === 'cv' ? 'email_cv_subject' : 'email_pb_subject';
+        const bodyKey = type === 'simple' ? 'email_simple_body' : type === 'cv' ? 'email_cv_body' : 'email_pb_body';
+
+        // Check if admin has customized the template
+        const defaultSimpleBody = 'Hej {{PARTICIPANT_NAME}},\\n\\nJag har gått igenom ditt material och har några tips att dela med mig av.\\n\\nVänliga hälsningar,\\n{{COACH_NAME}}';
+        const defaultCvBody = 'Hej {{PARTICIPANT_NAME}},\\n\\nBifogat hittar du ditt CV.\\n\\nLycka till med jobbsökandet!\\n\\nVänliga hälsningar,\\n{{COACH_NAME}}';
+        const defaultPbBody = 'Hej {{PARTICIPANT_NAME}},\\n\\nBifogat hittar du ditt personliga brev.\\n\\nVänliga hälsningar,\\n{{COACH_NAME}}';
+        const defaultSimpleSubj = 'Tips från coachen - {{PARTICIPANT_FULLNAME}}';
+        const defaultCvSubj = 'Ditt CV - {{PARTICIPANT_FULLNAME}}';
+        const defaultPbSubj = 'Ditt personliga brev - {{PARTICIPANT_FULLNAME}}';
+
+        const normalizeStr = (s: string) => s.replace(/\s+/g, '').trim();
+
+        const isDefaultSubject = (type === 'simple' && template?.subject === defaultSimpleSubj) || 
+                                 (type === 'cv' && template?.subject === defaultCvSubj) || 
+                                 (type === 'pb' && template?.subject === defaultPbSubj);
+        
+        const isDefaultBody = (type === 'simple' && normalizeStr(template?.body || '') === normalizeStr(defaultSimpleBody)) || 
+                              (type === 'cv' && normalizeStr(template?.body || '') === normalizeStr(defaultCvBody)) || 
+                              (type === 'pb' && normalizeStr(template?.body || '') === normalizeStr(defaultPbBody));
+
+        const rawSubject = isDefaultSubject || !template?.subject ? t(subjectKey) : template.subject;
+        const rawBody = isDefaultBody || !template?.body ? t(bodyKey) : template.body;
+
         // Function to replace variables in template
         const replaceVariables = (text: string) => {
             return text
                 .replace(/\{\{PARTICIPANT_NAME\}\}/g, participant.firstName)
                 .replace(/\{\{PARTICIPANT_FULLNAME\}\}/g, `${participant.firstName} ${participant.lastName}`)
                 .replace(/\{\{COACH_NAME\}\}/g, userProfile.displayName)
-                .replace(/\{\{COMPANY_NAME\}\}/g, systemSettings.companyName || 'Aventus');
+                .replace(/\{\{COMPANY_NAME\}\}/g, systemSettings.companyName || 'Aventus')
+                .replace(/\{\{SIGN_OFF\}\}/g, t('sign_off_default'));
         };
 
-        const subject = encodeURIComponent(replaceVariables(template?.subject || 'Tips från coachen'));
-        const body = encodeURIComponent(replaceVariables(template?.body || ''));
+        const subject = encodeURIComponent(replaceVariables(rawSubject));
+        const bodyText = replaceVariables(rawBody);
+        const body = encodeURIComponent(bodyText.replace('Vänliga hälsningar,', t('sign_off_default') || 'Vänliga hälsningar,'));
 
         const mailtoLink = `mailto:${participant.email}?subject=${subject}&body=${body}`;
         window.location.href = mailtoLink;
