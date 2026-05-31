@@ -111,9 +111,9 @@ export const Dashboard: React.FC<Props> = ({
     const getParticipantPhoto = (participantId: string) => {
         const pResumes = myResumes.filter(r => r.participantId === participantId);
         if (pResumes.length === 0) return null;
-        const sorted = [...pResumes].sort((a, b) => new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime());
-        const resumeWithPhoto = sorted.find(r => r.personal.photoUrl);
-        return resumeWithPhoto?.personal.photoUrl || null;
+        const sorted = [...pResumes].sort((a, b) => new Date(b.lastEdited || 0).getTime() - new Date(a.lastEdited || 0).getTime());
+        const resumeWithPhoto = sorted.find(r => r.personal?.photoUrl);
+        return resumeWithPhoto?.personal?.photoUrl || null;
     };
 
     // Email helper functions
@@ -255,8 +255,8 @@ export const Dashboard: React.FC<Props> = ({
         .sort((a, b) => new Date(b.lastActivity).getTime() - new Date(a.lastActivity).getTime());
 
     const participantResumes = (selectedParticipantId ? myResumes.filter(r => r.participantId === selectedParticipantId) : myResumes)
-        .filter(r => r.title.toLowerCase().includes(docSearchQuery.toLowerCase()))
-        .sort((a, b) => new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime());
+        .filter(r => (r.title || '').toLowerCase().includes((docSearchQuery || '').toLowerCase()))
+        .sort((a, b) => new Date(b.lastEdited || 0).getTime() - new Date(a.lastEdited || 0).getTime());
 
     // FLATTEN DOCUMENTS (CV + Cover Letters)
     const allDocuments = (participantResumes || []).flatMap(r => {
@@ -266,9 +266,9 @@ export const Dashboard: React.FC<Props> = ({
             type: 'cv',
             id: r.id,
             resume: r,
-            title: r.title,
-            lastEdited: r.lastEdited,
-            displayDate: new Date(r.lastEdited),
+            title: r.title || 'Namnlöst CV',
+            lastEdited: r.lastEdited || new Date().toISOString(),
+            displayDate: new Date(r.lastEdited || new Date()),
             brevId: undefined as string | undefined
         });
         // Add Cover Letters
@@ -289,7 +289,7 @@ export const Dashboard: React.FC<Props> = ({
     }).sort((a, b) => b.displayDate.getTime() - a.displayDate.getTime());
 
     // Filter documents based on search
-    const filteredDocuments = allDocuments.filter(d => d.title.toLowerCase().includes(docSearchQuery.toLowerCase()));
+    const filteredDocuments = allDocuments.filter(d => (d.title || '').toLowerCase().includes((docSearchQuery || '').toLowerCase()));
 
 
     const handleFileImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -915,7 +915,7 @@ export const Dashboard: React.FC<Props> = ({
                         <div className="bg-white dark:bg-gray-800 rounded-[2.5rem] p-10 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center gap-8">
                             <div className="flex items-center gap-8">
                                 <div className="w-28 h-28 bg-gray-50 dark:bg-gray-700 rounded-3xl flex items-center justify-center text-5xl font-black text-brand-400 overflow-hidden shadow-inner border border-gray-100 dark:border-gray-600">
-                                    {selectedParticipantPhoto ? <img src={selectedParticipantPhoto} className="w-full h-full object-cover" /> : selectedParticipant?.firstName[0]}
+                                    {selectedParticipantPhoto ? <img src={selectedParticipantPhoto} className="w-full h-full object-cover" /> : selectedParticipant?.firstName?.[0] || '?'}
                                 </div>
                                 <div className="space-y-2">
                                     <h2 className="text-4xl font-black text-gray-900 dark:text-white tracking-tight">{selectedParticipant?.firstName} {selectedParticipant?.lastName}</h2>
@@ -1229,7 +1229,7 @@ export const Dashboard: React.FC<Props> = ({
                                             )}
                                             <div className="flex items-center gap-6 mb-8">
                                                 <div className="w-20 h-20 rounded-2xl bg-gray-50 dark:bg-gray-700 flex items-center justify-center font-black text-3xl text-brand-400 overflow-hidden border border-gray-100 dark:border-gray-600 shadow-inner group-hover:scale-110 transition-transform">
-                                                    {photo ? <img src={photo} className="w-full h-full object-cover" /> : p.firstName[0]}
+                                                    {photo ? <img src={photo} className="w-full h-full object-cover" /> : p.firstName?.[0] || '?'}
                                                 </div>
                                                 <div className="min-w-0">
                                                     <h3 className="font-black text-gray-900 dark:text-white text-xl truncate tracking-tight">{p.firstName} {p.lastName}</h3>
@@ -1326,7 +1326,7 @@ export const Dashboard: React.FC<Props> = ({
                                                     )}
                                                     <td className="px-8 py-4">
                                                         <div className="w-12 h-12 rounded-xl bg-gray-100 dark:bg-gray-700 flex items-center justify-center font-black text-lg text-brand-400 overflow-hidden">
-                                                            {photo ? <img src={photo} className="w-full h-full object-cover" /> : p.firstName[0]}
+                                                            {photo ? <img src={photo} className="w-full h-full object-cover" /> : p.firstName?.[0] || '?'}
                                                         </div>
                                                     </td>
                                                     <td className="px-6 py-4">

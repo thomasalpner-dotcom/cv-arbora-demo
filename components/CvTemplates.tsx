@@ -1170,6 +1170,7 @@ export const ModernTimeline: React.FC<TemplateProps> = ({ data, fontClass, conta
 };
 
 export const StandardCoverLetter: React.FC<TemplateProps> = ({ data, containerStyle, design, isBrev, brevContent }) => {
+    const { t } = useTranslation();
     const p = data.personal;
     const coverLetter = data.coverLetters?.find(l => l.content === brevContent) || { title: 'Ansökan' };
 

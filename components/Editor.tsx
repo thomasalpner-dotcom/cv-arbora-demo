@@ -466,7 +466,7 @@ export const Editor: React.FC<Props> = ({ resume, onSave, onBack, isDarkMode, to
                 // Auto-genererat namn – bygg som förut
                 const name = `${firstName} ${lastName}`.trim() || 'CV';
                 fileName = `${name} - CV - ${today}`;
-                const kopiaMatch = data.title.match(/ \(kopia( \d+)?\)$/);
+                const kopiaMatch = (data.title || '').match(/ \(kopia( \d+)?\)$/);
                 if (kopiaMatch) fileName += kopiaMatch[0];
             }
         } else {
@@ -546,19 +546,18 @@ export const Editor: React.FC<Props> = ({ resume, onSave, onBack, isDarkMode, to
         }
 
         setShowAdminMenu(false);
-        
-        // Öppna första sektionen så man ser att det hände något
+// Öppna första sektionen så man ser att det hände något
         setActiveSection('personal');
     };
 
     const renderItemEditor = (sectionId: string, item: any) => {
         const updateItem = (updates: any) => {
-            const list = (data[sectionId as keyof ResumeData] as any[]).map(i => i.id === item.id ? { ...i, ...updates } : i);
+            const list = ((data[sectionId as keyof ResumeData] as any[]) || []).map(i => i.id === item.id ? { ...i, ...updates } : i);
             updateField(sectionId as keyof ResumeData, list);
         };
 
         const removeItem = () => {
-            const list = (data[sectionId as keyof ResumeData] as any[]).filter(i => i.id !== item.id);
+            const list = ((data[sectionId as keyof ResumeData] as any[]) || []).filter(i => i.id !== item.id);
             updateField(sectionId as keyof ResumeData, list);
         };
 

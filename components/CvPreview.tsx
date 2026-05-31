@@ -80,14 +80,29 @@ export const CvPreview: React.FC<Props> = ({ data, template, brevId }) => {
     'master': MasterTemplate
   };
 
+  const safeData = {
+    ...data,
+    personal: data.personal || {},
+    experience: data.experience || [],
+    education: data.education || [],
+    skills: data.skills || [],
+    languages: data.languages || [],
+    courses: data.courses || [],
+    certificates: data.certificates || [],
+    internships: data.internships || [],
+    hobbies: data.hobbies || [],
+    references: data.references || [],
+    coverLetters: data.coverLetters || []
+  };
+
   // Determine content type (CV or Cover Letter)
-  const brevContent = brevId ? data.coverLetters?.find(l => l.id === brevId)?.content : undefined;
+  const brevContent = brevId ? safeData.coverLetters?.find(l => l.id === brevId)?.content : undefined;
   const SelectedTemplate = templates[template] || ClassicSidebar;
 
   if (brevId) {
     return (
       <StandardCoverLetter
-        data={data}
+        data={safeData as ResumeData}
         fontClass=""
         containerStyle={containerStyle}
         design={design}
@@ -100,12 +115,12 @@ export const CvPreview: React.FC<Props> = ({ data, template, brevId }) => {
 
   return (
     <SelectedTemplate
-      data={data}
+      data={safeData as ResumeData}
       fontClass=""
       containerStyle={containerStyle}
       design={design}
       headerHelper={headerHelper}
-      config={data.customTemplateConfig}
+      config={safeData.customTemplateConfig}
     />
   );
 };
